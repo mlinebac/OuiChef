@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "988097003445",
+    "firebase_url": "https://oui-chef-19b23.firebaseio.com",
+    "project_id": "oui-chef-19b23",
+    "storage_bucket": "oui-chef-19b23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988097003445:android:2b7d726565545d12",
+        "android_client_info": {
+          "package_name": "me.mattlineback.ouichef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988097003445-841ksh19mne1sqa3roolr1ki0168bbsc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.mattlineback.ouichef",
+            "certificate_hash": "0e50832bf70ea02b80e78d9eefbad2e5db09085b"
+          }
+        },
+        {
+          "client_id": "988097003445-lteltld30jus60tvog78g0ho18jbt46i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-4lgEUVTZJMI8pALRcyitXdn4O5BP35k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988097003445-lteltld30jus60tvog78g0ho18jbt46i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
