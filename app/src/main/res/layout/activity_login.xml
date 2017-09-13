@@ -22,13 +22,15 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -38,10 +40,12 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_blue_dark"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textSize="18sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -69,7 +73,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_weight="6.33"
+                android:background="@android:color/holo_blue_dark"
                 android:text="@string/action_sign_in"
+                android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
         </LinearLayout>

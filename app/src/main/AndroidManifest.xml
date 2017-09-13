@@ -23,6 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeScreen" />
+        <activity
+            android:name=".Recipes"
+            android:label="@string/title_activity_recipes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PrepList" />
+        <activity
+            android:name=".OrderList"
+            android:label="@string/title_activity_order_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EightySixBoard"
+            android:label="@string/title_activity_eighty_six_board"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
