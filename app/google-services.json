@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "988097003445-s5o5nk40f85t6n1aboharvslvgehgotm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.mattlineback.ouichef",
+            "certificate_hash": "b01c53cb572f45c89455e3309d68beac3b1f36b7"
+          }
+        },
+        {
           "client_id": "988097003445-841ksh19mne1sqa3roolr1ki0168bbsc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
