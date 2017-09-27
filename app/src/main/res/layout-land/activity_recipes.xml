@@ -55,15 +55,15 @@
 
     <FrameLayout
         android:id="@+id/frame_recipes"
-        android:layout_width="500dp"
-        android:layout_height="800dp"
+        android:layout_width="850dp"
+        android:layout_height="350dp"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_recipes"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.348">
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
@@ -71,7 +71,7 @@
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="26dp"
         android:text="HOME"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
@@ -80,7 +80,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/frame_recipes"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
 
