@@ -14,8 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OrderList extends AppCompatActivity {
-    @BindView(R2.id.button_home)
-    Button home;
+    @BindView(R2.id.button_home) Button home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
