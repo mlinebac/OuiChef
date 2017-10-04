@@ -1,13 +1,52 @@
 package me.mattlineback.ouichef;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
-public class HomeScreen extends AppCompatActivity {
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+
+public class HomeScreen extends AppCompatActivity{
+    @BindView(R2.id.button_recipes) Button recipes;
+    @BindView(R2.id.button_prep) Button prep;
+    @BindView(R2.id.button_order) Button order;
+    @BindView(R2.id.button_86) Button eightySix;
+    ArrayList<Button> menuButtons = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        ButterKnife.bind(this);
+
+    }
+
+    @OnClick({R2.id.button_recipes, R2.id.button_prep, R2.id.button_order, R2.id.button_86})
+    public void submit(View view) {
+        if (view == recipes) {
+            Intent intent = new Intent(HomeScreen.this, Recipes.class);
+            startActivity(intent);
+            finish();
+        }else if (view == prep){
+            Intent intent = new Intent(HomeScreen.this, PrepList.class);
+            startActivity(intent);
+            finish();
+        }else if(view == order){
+            Intent intent = new Intent(HomeScreen.this, OrderList.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(HomeScreen.this, EightySixBoard.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
