@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //FirebaseAuth object and listener for signin
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressDialog mAuthProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +52,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //get shared instance of the FirebaseAuth object
         mAuth = FirebaseAuth.getInstance();
-        createAuthProgressDialog();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in: " + user.getUid());
                     Intent intent = new Intent(LoginActivity.this, HomeScreen.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
+                }else{
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -100,23 +102,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                mAuthProgressDialog.dismiss();
+
 
                 if (!task.isSuccessful()) {
-                    Log.w(TAG, "signInWithEmail", task.getException());
+                    Log.w(TAG, "signInWithEmail:failed", task.getException());
                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
                 }
             }
 
         });
-    }
-
-    private void createAuthProgressDialog() {
-        mAuthProgressDialog = new ProgressDialog(this);
-        mAuthProgressDialog.setTitle("Loading...");
-        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
-        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override
