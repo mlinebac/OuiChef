@@ -16,4 +16,14 @@
     <string name="title_activity_recipes">Recipes</string>
     <string name="title_activity_order_list">OrderList</string>
     <string name="title_activity_eighty_six_board">EightySixBoard</string>
+    <string name="order_list">Order List</string>
+    <string name="enter_item_to_order">Enter Item to Order</string>
+    <string name="home">HOME</string>
+    <string name="login">Login</string>
+    <string name="qui_chef_nlogin">QUI CHEF  LOGIN</string>
+    <string name="add_item">Add Item</string>
+    <string name="recipes">Recipes</string>
+    <string name="order">Order</string>
+    <string name="prep">PREP</string>
+    <string name="_86">86</string>
 </resources>

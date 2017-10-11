@@ -44,7 +44,7 @@
             android:padding="10dp"
             android:layout_marginTop="20dp"
             android:background="@color/colorAccent"
-            android:text="Login"
+            android:text="@string/login"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
     </LinearLayout>
@@ -52,10 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lines = "2"
-        android:text="QUI CHEF \nLOGIN"
+        android:text="@string/qui_chef_nlogin"
         android:textAlignment="center"
         android:textColor = "@android:color/white"
-        android:textSize = "30dp"
+        android:textSize = "30sp"
         android:textStyle="bold"
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true"/>
