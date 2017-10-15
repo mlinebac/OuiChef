@@ -26,4 +26,5 @@
     <string name="order">Order</string>
     <string name="prep">PREP</string>
     <string name="_86">86</string>
+    <string name="delete_all">Delete All</string>
 </resources>

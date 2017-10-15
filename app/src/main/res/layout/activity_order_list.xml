@@ -49,14 +49,29 @@
             android:text="@string/add_item"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
-        <ListView
-            android:id="@+id/list_order_list"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/order_list"
             android:layout_width="443dp"
-            android:layout_height="795dp"
+            android:layout_height="583dp"
             android:layout_margin="8dp"
             tools:layout_editor_absoluteY="84dp" />
-    </LinearLayout>
 
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/action_delete_all"
+        style="?android:textAppearanceLarge"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:text="@string/delete_all"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
