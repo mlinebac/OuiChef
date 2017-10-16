@@ -7,14 +7,15 @@
     tools:context="me.mattlineback.ouichef.OrderList"
     android:background="@color/colorPrimary">
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
+        android:id="@+id/linearLayout"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
         <TextView
             android:id="@+id/title_order_list"
             android:layout_width="match_parent"
@@ -25,20 +26,52 @@
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add_order_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:inputType="text"
+            android:hint="@string/enter_item_to_order"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/order_item_button"
+            style="?android:textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:text="@string/add_item"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
         <ListView
             android:id="@+id/order_list"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="443dp"
+            android:layout_height="583dp"
             android:layout_margin="8dp"
-            android:textColor="@android:color/background_light"
-            android:textStyle="bold"
             tools:layout_editor_absoluteY="84dp" />
-    </LinearLayout>
 
+    </LinearLayout>
+    <Button
+        android:id="@+id/action_delete_all"
+        style="?android:textAppearanceLarge"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:text="Delete All"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home"/>
-
 </RelativeLayout>
