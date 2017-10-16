@@ -1,6 +1,7 @@
 package me.mattlineback.ouichef;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -41,6 +42,7 @@ public class OrderList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //this.items = new LinkedList<OrderItem>();
+                myRef.removeValue();
             }
         });
         addItemButton.setOnClickListener(new View.OnClickListener() {
@@ -51,17 +53,22 @@ public class OrderList extends AppCompatActivity {
             }
         });
 
-        FirebaseListAdapter<OrderItem> adapter = new FirebaseListAdapter<OrderItem>(
+        final FirebaseListAdapter<OrderItem> adapter = new FirebaseListAdapter<OrderItem>(
                 this, OrderItem.class, android.R.layout.activity_list_item, myRef
 
         ) {
             @Override
             protected void populateView(View view, OrderItem item, int i) {
-                ((TextView)view.findViewById(android.R.id.text1)).setText(item.getOrderItemText());
+                TextView listItemShow = view.findViewById(android.R.id.text1);
+                listItemShow.setTextColor(Color.WHITE);
+                listItemShow.setAllCaps(true);
+                listItemShow.setTextSize(20);
+                (listItemShow).setText(item.getOrderItemText());
             }
         };
 
         orderList.setAdapter(adapter);
+
     }
         @OnClick(R2.id.button_home)
     public void submit(View view) {
