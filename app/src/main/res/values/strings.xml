@@ -29,4 +29,6 @@
     <string name="delete_all">Delete All</string>
     <string name="_86_list">86 List</string>
     <string name="enter_item_to_86">Enter item to 86</string>
+    <string name="prep_list">Prep List</string>
+    <string name="enter_item_to_prep">Enter item to prep</string>
 </resources>
