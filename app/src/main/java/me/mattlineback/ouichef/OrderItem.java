@@ -11,20 +11,20 @@ import java.util.Map;
  */
 @IgnoreExtraProperties
 public class OrderItem {
-    public String orderItemText;
+    public String orderItem;
 
     //get item to add to order list
     public String getOrderItemText(){
-        return orderItemText;
+        return orderItem;
     }
     //set item to orderItemText
     public void setOrderItemText(String orderItemText){
-        this.orderItemText = orderItemText;
+        this.orderItem = orderItemText;
     }
 
     @Override
     public String toString(){
-        return this.orderItemText;
+        return this.orderItem;
     }
     //default constructor used for DataSnapshot
 
@@ -32,14 +32,14 @@ public class OrderItem {
     }
 
     public OrderItem(String orderItemText){
-        this.orderItemText = orderItemText;
+        this.orderItem = orderItemText;
     }
     //used for writing items to firebase database
 
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("orderItemText", orderItemText);
+        result.put("orderItemText", orderItem);
         return result;
     }
 }
