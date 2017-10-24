@@ -13,11 +13,13 @@ public class OrderItem {
     }
 
     OrderItem(String orderItemText) {
+
         this.orderItem = orderItemText;
     }
 
     //get item to add to order list
     public String getOrderItemText() {
+
         return orderItem;
     }
 }
