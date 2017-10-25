@@ -8,9 +8,26 @@
     android:background="@color/colorPrimary">
     <Button
         android:id="@+id/button_home"
+        android:padding="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home"/>
+    <Button
+        android:id="@+id/action_delete_all"
+        style="?android:textAppearanceLarge"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:text="@string/delete_list"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,10 +42,10 @@
             android:id="@+id/title_86_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:textAlignment="center"
             android:textColor = "@android:color/white"
-            android:textSize = "30sp"
+            android:textSize = "50sp"
             android:textStyle = "bold"
             android:text="@string/_86_list"/>
 
@@ -38,7 +55,7 @@
             android:layout_height="wrap_content"
             android:background= "@android:color/white"
             android:textSize = "20sp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:padding="10dp"
             android:inputType="text"
             android:hint="@string/enter_item_to_86"/>
@@ -49,29 +66,18 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorAccent"
             android:text="@string/add_item"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
         <ListView
             android:id="@+id/EightSix_list"
-            android:layout_width="443dp"
-            android:layout_height="583dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             tools:layout_editor_absoluteY="84dp" />
     </LinearLayout>
-    <Button
-        android:id="@+id/action_delete_all"
-        style="?android:textAppearanceLarge"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:background="@color/colorAccent"
-        android:padding="10dp"
-        android:text="Delete All"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold"
-        android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
 
