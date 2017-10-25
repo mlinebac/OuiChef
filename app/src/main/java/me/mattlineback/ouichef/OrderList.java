@@ -1,11 +1,9 @@
 package me.mattlineback.ouichef;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v4.app.ActivityManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,8 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.id.list;
 
 public class OrderList extends AppCompatActivity {
     private final String TAG = "OrderListActivity";
@@ -44,7 +40,6 @@ public class OrderList extends AppCompatActivity {
         this.mDB = FirebaseDatabase.getInstance();
         this.myRef = mDB.getReference("orderList");
 
-
         orderList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id ){
@@ -52,9 +47,7 @@ public class OrderList extends AppCompatActivity {
                 tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 tv.setTextColor(Color.DKGRAY);
             }
-        }
-        );
-
+        });
 
         deleteList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,39 +56,40 @@ public class OrderList extends AppCompatActivity {
                 myRef.removeValue();
             }
         });
+
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OrderItem item = new OrderItem(addOrderItem.getText().toString());
+                ListItem item = new ListItem(addOrderItem.getText().toString());
                 myRef.push().setValue(item);
             }
         });
 
-        final FirebaseListAdapter<OrderItem> adapter = new FirebaseListAdapter<OrderItem>(
-                this, OrderItem.class, android.R.layout.activity_list_item, myRef
+        final FirebaseListAdapter<ListItem> adapter = new FirebaseListAdapter<ListItem>(
+                this, ListItem.class, android.R.layout.activity_list_item, myRef
 
         ) {
             @Override
-            protected void populateView(View view, OrderItem item, int i) {
+            protected void populateView(View view, ListItem item, int i) {
                 TextView listItemShow = view.findViewById(android.R.id.text1);
                 listItemShow.setTextColor(Color.WHITE);
                 listItemShow.setAllCaps(true);
                 listItemShow.setTextSize(20);
                 //listItemShow.setPaintFlags(listItemShow.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                (listItemShow).setText(item.getOrderItemText());
+                (listItemShow).setText(item.getListItem());
             }
         };
 
         orderList.setAdapter(adapter);
 
     }
-        @OnClick(R2.id.button_home)
+
+    @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
             Intent intent = new Intent(OrderList.this, HomeScreen.class);
             startActivity(intent);
             finish();
         }
-
     }
 }
