@@ -1,10 +1,14 @@
 package me.mattlineback.ouichef;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.ActivityManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.R.id.list;
 
 public class OrderList extends AppCompatActivity {
     private final String TAG = "OrderListActivity";
@@ -37,6 +43,18 @@ public class OrderList extends AppCompatActivity {
 
         this.mDB = FirebaseDatabase.getInstance();
         this.myRef = mDB.getReference("orderList");
+
+
+        orderList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id ){
+                TextView tv = view.findViewById(android.R.id.text1);
+                tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                tv.setTextColor(Color.DKGRAY);
+            }
+        }
+        );
+
 
         deleteList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +81,7 @@ public class OrderList extends AppCompatActivity {
                 listItemShow.setTextColor(Color.WHITE);
                 listItemShow.setAllCaps(true);
                 listItemShow.setTextSize(20);
+                //listItemShow.setPaintFlags(listItemShow.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 (listItemShow).setText(item.getOrderItemText());
             }
         };

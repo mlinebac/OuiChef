@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,9 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +31,6 @@ public class PrepList extends AppCompatActivity {
     private final String TAG = "prepListActivity";
     FirebaseDatabase mDB;
     DatabaseReference myRef;
-    ListAdapter listAdapt;
 
     @BindView(R2.id.button_home)
     Button home;
@@ -37,7 +41,7 @@ public class PrepList extends AppCompatActivity {
     @BindView(R2.id.action_delete_all)
     Button deleteList;
     @BindView(R2.id.prep_list)
-    RecyclerView prepList;
+    ListView prepList;
 
 
     @Override
@@ -48,91 +52,67 @@ public class PrepList extends AppCompatActivity {
 
         this.mDB = FirebaseDatabase.getInstance();
         this.myRef = mDB.getReference("prepList");
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        FirebaseRecyclerAdapter<PrepItem, PrepViewHolder> firebaseAdapter = new FirebaseRecyclerAdapter<PrepItem, PrepViewHolder>(
-                PrepItem.class,
-                android.R.layout.activity_list_item,
-                PrepViewHolder.class,
-                myRef
+
+/*
+        private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                myRef.removeValue();
+            }
+        };
+       */
+        prepList.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                View parentRow = (View) view.getParent();
+                ListView listView = (ListView) parentRow.getParent();
+                final int position = listView.getPositionForView(parentRow);
+
+
+
+            }
+
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                myRef.removeValue();
+            }
+        });
+
+
+
+        deleteList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRef.removeValue();
+            }
+        });
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OrderItem item = new OrderItem(addPrepItem.getText().toString());
+                myRef.push().setValue(item);
+            }
+        });
+
+        final FirebaseListAdapter<PrepItem> adapter = new FirebaseListAdapter<PrepItem>(
+                this, PrepItem.class, android.R.layout.activity_list_item, myRef
 
         ) {
             @Override
-            protected void populateViewHolder(PrepViewHolder viewHolder, PrepItem model, int position) {
-                viewHolder.setPrepItem(model.getPrepItem());
+            protected void populateView(View view, PrepItem item, int i) {
+                TextView listItemShow = view.findViewById(android.R.id.text1);
+                listItemShow.setTextColor(Color.WHITE);
+                listItemShow.setAllCaps(true);
+                listItemShow.setTextSize(20);
+                (listItemShow).setText(item.getPrepItem());
             }
         };
-        prepList.setAdapter(firebaseAdapter);
-    }
-
-    public static class PrepViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public PrepViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-
-        }
-
-        public void setPrepItem(String prepItem) {
-
-            TextView post_prepItem = (TextView) mView.findViewById(R.id.add_prep_item);
-            post_prepItem.setText(prepItem);
-        }
-    }
-}
-/*
-        deleteList.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        myRef.removeValue();
-    }
-    });
-
-        addItemButton.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        PrepItem item = new PrepItem(addPrepItem.getText().toString());
-        myRef.push().setValue(item); //removeValue();
-    }
-    });
-
-        prepList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-
-    {
-        @Override
-        public void onItemClick (AdapterView < ? > adapterView, View view,int i, long l){
-        FirebaseRecyclerAdapter itemtoRemove = adapter.getRef(i);
-        itemtoRemove.removeValue();
-
-    }
-    });
-    final FirebaseListAdapter<PrepItem> adapter = new FirebaseListAdapter<PrepItem>(
-            this, PrepItem.class, android.R.layout.activity_list_item, myRef
-
-    ) {
-        @Override
-        protected void populateView(View view, PrepItem item, int i) {
-            TextView prepItemShow = view.findViewById(android.R.id.text1);
-            prepItemShow.setTextColor(Color.WHITE);
-            prepItemShow.setAllCaps(true);
-            prepItemShow.setTextSize(20);
-            (prepItemShow).setText(item.getPrepItemText());
-        }
-    };
 
         prepList.setAdapter(adapter);
 
-
+    }
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
@@ -143,4 +123,3 @@ public class PrepList extends AppCompatActivity {
 
     }
 }
-*/
