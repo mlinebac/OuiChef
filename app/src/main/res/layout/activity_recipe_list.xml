@@ -4,47 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.mattlineback.ouichef.Recipes"
+    tools:context="me.mattlineback.ouichef.RecipeList"
     android:background="@color/colorPrimary">
-    <Button
+
+     <Button
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home"/>
-    <LinearLayout
-        android:id="@+id/center_point"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal" />
+    <Button
+        android:id="@+id/double_button"
+        style="?android:textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:text="@string/double_recipe"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="30dp"
-        android:id="@+id/left_linearLayout"
-        android:layout_alignEnd="@+id/center_point"
-        android:layout_alignRight="@+id/center_point">
+        android:id="@+id/linearLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <TextView
             android:id="@+id/title_recipes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Recipes"
+            android:textColor="@android:color/white"
             android:textAlignment="center"
-            android:textColor = "@android:color/white"
-            android:textSize = "50sp"
-            android:textStyle = "bold"
-            android:text="@string/recipes"/>
+            android:textSize="50sp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/search_recipes"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background= "@android:color/white"
-            android:textSize = "20sp"
+            android:background="@android:color/white"
             android:layout_marginTop="10dp"
             android:padding="10dp"
             android:inputType="text"
-            android:hint="@string/enter_recipe_to_search"/>
+            android:hint="@string/enter_recipe_to_search"
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/search_recipes_button"
             style="?android:textAppearanceLarge"
@@ -57,32 +67,24 @@
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
         <Button
-            android:id="@+id/action_delete_all"
+            android:id="@+id/download_recipes_button"
+            android:enabled = "false"
+            android:onClick="buttonClickHandler"
             style="?android:textAppearanceLarge"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@color/colorAccent"
             android:padding="10dp"
-            android:text="@string/delete_list"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:text="@string/download_recipe"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/right_layout"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/center_point"
-        android:layout_alignLeft="@+id/center_point">
-        <View
+        <ListView
             android:id="@+id/recipe_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </RelativeLayout>
 
 

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.mattlineback.ouichef.RecipeList"
+    android:background="@color/colorPrimary">
+    <Button
+        android:id="@+id/button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"/>
+    <LinearLayout
+        android:id="@+id/center_point"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:id="@+id/left_linearLayout"
+        android:layout_alignEnd="@+id/center_point"
+        android:layout_alignRight="@+id/center_point">
+        <TextView
+            android:id="@+id/title_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor = "@android:color/white"
+            android:textSize = "50sp"
+            android:textStyle = "bold"
+            android:text="@string/recipes"/>
+
+        <EditText
+            android:id="@+id/search_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background= "@android:color/white"
+            android:textSize = "20sp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:inputType="text"
+            android:hint="@string/enter_recipe_to_search"/>
+        <Button
+            android:id="@+id/search_recipes_button"
+            style="?android:textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:text="@string/search_recipes"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/action_delete_all"
+            style="?android:textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="@string/delete_list"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/right_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/center_point"
+        android:layout_alignLeft="@+id/center_point">
+        <View
+            android:id="@+id/recipe_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"/>
+    </LinearLayout>
+</RelativeLayout>
+
+
+

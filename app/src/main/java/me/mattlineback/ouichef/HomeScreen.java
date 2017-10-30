@@ -33,7 +33,7 @@ public class HomeScreen extends AppCompatActivity{
     @OnClick({R2.id.button_recipes, R2.id.button_prep, R2.id.button_order, R2.id.button_86})
     public void submit(View view) {
         if (view == recipes) {
-            getIntent(Recipes.class);
+            getIntent(RecipeList.class);
         }else if (view == prep){
             getIntent(PrepList.class);
         }else if(view == order){
