@@ -30,6 +30,7 @@
         <activity android:name=".PrepList" />
         <activity android:name=".OrderList" />
         <activity android:name=".EightySixBoard" />
+        <activity android:name=".create_recipe"></activity>
     </application>
 
 </manifest>

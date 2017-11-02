@@ -36,4 +36,6 @@
     <string name="search_recipes">Search Recipes</string>
     <string name="double_recipe">Double Recipe</string>
     <string name="download_recipe">download recipe</string>
+    <string name="enter_recipe_name">Enter Recipe Name</string>
+    <string name="enter_recipes">Enter Recipes</string>
 </resources>
