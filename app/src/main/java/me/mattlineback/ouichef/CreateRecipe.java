@@ -3,7 +3,7 @@ package me.mattlineback.ouichef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class create_recipe extends AppCompatActivity {
+public class CreateRecipe extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

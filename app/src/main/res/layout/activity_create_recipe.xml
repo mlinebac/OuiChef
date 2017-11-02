@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.mattlineback.ouichef.create_recipe"
+    tools:context="me.mattlineback.ouichef.CreateRecipe"
     android:background="@color/colorPrimary">
     <Button
         android:id="@+id/button_home"
@@ -19,20 +19,19 @@
         android:id="@+id/create_recipe_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Create Recipe"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/button_home"
         android:layout_toEndOf="@+id/button_home"/>
     <RelativeLayout
         android:id="@+id/RelativeLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dp"
+        android:padding="15dp"
         android:layout_below="@id/create_recipe_title">
         <EditText
             android:id="@+id/enter_recipe_name"
@@ -45,7 +44,7 @@
             android:padding="10dp"
             android:inputType="text"
             android:hint="Enter new recipe name here"
-            android:textSize="22sp"/>
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/enter_recipe_button"
             android:layout_width="fill_parent"
@@ -58,42 +57,43 @@
             android:layout_toRightOf="@+id/enter_recipe_name"
             android:layout_toEndOf="@+id/enter_recipe_name" />
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/linear_01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:layout_below="@id/RelativeLayout"
-        android:orientation="vertical">
-        <EditText
-            android:id="@+id/enter_ingredient"
-            android:layout_width="wrap_content"
-            android:padding="10dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/white"
-            android:hint="Enter Ingredient"/>
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relative_01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:layout_below="@id/linear_01">
+        android:padding="15dp"
+        android:layout_below="@id/RelativeLayout">
+        <EditText
+            android:id="@+id/enter_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/white"
+            android:hint="Enter Ingredient"/>
         <EditText
             android:id="@+id/enter_amount"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:padding="10dp"
             android:layout_marginBottom="10dp"
             android:background="@android:color/white"
             android:hint="Enter amount"
-            android:inputType="number"/>
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/enter_ingredient"
+            android:layout_toEndOf="@+id/enter_ingredient"
+            android:inputType="number"
+            android:layout_marginLeft="10dp" />
         <EditText
             android:id="@+id/enter_unit"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:layout_marginBottom="10dp"
             android:background="@android:color/white"
             android:hint="Enter unit"
@@ -102,26 +102,52 @@
             android:layout_toRightOf="@+id/enter_amount"
             android:layout_toEndOf="@+id/enter_amount"
             android:layout_marginStart="10dp" />
+        <Button
+            android:id="@+id/enter_ingredient_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="enter"
+            android:textColor="@android:color/background_light"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/enter_unit"
+            android:layout_toEndOf="@+id/enter_unit"/>
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/linear_02"
+    <RelativeLayout
+        android:id="@+id/relative_02"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/relative_01"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_below="@id/relative_01">
         <EditText
             android:id="@+id/enter_instructions"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:background="@android:color/white"
-            android:hint="Enter instructions" />
-    </LinearLayout>
+            android:hint="Enter instructions"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="300dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="300dp" />
+        <Button
+            android:id="@+id/enter_instructions_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="enter"
+            android:textColor="@android:color/background_light"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/enter_instructions"
+            android:layout_toEndOf="@+id/enter_instructions"
+            android:layout_marginStart="10dp" />
+    </RelativeLayout>
     <View
         android:id="@+id/recipe_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/linear_02">
+        android:layout_below="@id/relative_02">
     </View>
 </RelativeLayout>

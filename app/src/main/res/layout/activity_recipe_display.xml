@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/relative"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.mattlineback.ouichef.OrderList"
+    tools:context="me.mattlineback.ouichef.RecipeDisplay"
     android:background="@color/colorPrimary">
     <RelativeLayout
         android:id="@+id/relative_1"
@@ -22,11 +23,11 @@
             android:text="@string/home"
             android:layout_marginRight="50dp" />
         <TextView
-            android:id="@+id/title_order_list"
+            android:id="@+id/title_recipes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="@string/order_list"
+            android:text="@string/recipes"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="50sp"
@@ -35,53 +36,48 @@
             android:layout_toEndOf="@+id/button_home"
             android:layout_marginEnd="20dp" />
         <Button
-            android:id="@+id/action_delete_all"
+            android:id="@+id/double_button"
             style="?android:textAppearanceLarge"
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:padding="10dp"
-            android:text="@string/delete_list"
+            android:text="@string/double_recipe"
             android:textColor="@android:color/background_light"
             android:textStyle="bold"
-            android:layout_toRightOf="@+id/title_order_list"
-            android:layout_toEndOf="@+id/title_order_list"/>
+            android:layout_toRightOf="@+id/title_recipes"
+            android:layout_toEndOf="@+id/title_recipes"/>
     </RelativeLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/layout_1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="30dp"
-        android:id="@+id/linearLayout"
-        android:layout_below="@id/relative_1">
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/relative_1">
         <EditText
-            android:id="@+id/add_order_item"
-            android:layout_width="match_parent"
+            android:id="@+id/name_recipes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:padding="10dp"
             android:inputType="text"
-            android:hint="@string/enter_item_to_order"
+            android:hint="@string/enter_recipe_name"
             android:textSize="20sp"/>
         <Button
-            android:id="@+id/order_item_button"
-            style="?android:textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/colorAccent"
-            android:text="@string/add_item"
-            android:textColor="@android:color/background_light"
-            android:textStyle="bold" />
-        <ListView
-            android:id="@+id/order_list"
+            android:id="@+id/enter_instructions_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"/>
+            android:text="enter"
+            android:textColor="@android:color/background_light"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
     </LinearLayout>
-
-
+    <ListView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/layout_1">
+    </ListView>
 </RelativeLayout>

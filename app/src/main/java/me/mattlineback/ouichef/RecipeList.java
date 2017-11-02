@@ -31,7 +31,6 @@ public class RecipeList extends AppCompatActivity {
     @BindView(R2.id.button_home) Button home;
     @BindView(R2.id.recipe_view) ListView listView;
     @BindView(R2.id.download_recipes_button) Button btnDownload;
-    @BindView(R2.id.add_recipe_button) Button btnRecipe;
     @BindView(R2.id.name_recipes) EditText recipeName;
 
     ArrayList<RecipeItem> recipeItems = new ArrayList<>();
@@ -93,18 +92,15 @@ public class RecipeList extends AppCompatActivity {
                 String unit = columns.getJSONObject(3).getString("v");
                 String instruction = columns.getJSONObject(4).getString("v");
 
-                RecipeItem recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
+                //entering recipe into database
+                String str = recipeName.getText().toString();
+                DatabaseReference recipeRef = myRef.child(str);
+                RecipeItem recipeItem;
+                recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
+                //adding each item to recipe
                 recipeItems.add(recipeItem);
-                final String[] str = new String[1];
-                btnRecipe.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       str[0] = recipeName.getText().toString();
-                       myRef.push().setValue(str[0]);
-                    }
-                });
-
-                myRef.push().child(str[0]).setValue(recipeItem);
+                //adding each item to recipe database
+                recipeRef.push().setValue(recipeItem);
             }
 
             final RecipesAdapter adapter = new RecipesAdapter(this, R.layout.activity_recipe, recipeItems);
