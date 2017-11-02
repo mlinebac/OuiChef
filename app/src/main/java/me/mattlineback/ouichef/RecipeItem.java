@@ -20,7 +20,8 @@ public class RecipeItem {
         this.setUnit(unit);
         this.setInstruction(instruction);
     }
-
+    public RecipeItem(){
+    }
     String getIngredient(){
         return ingredient;
     }

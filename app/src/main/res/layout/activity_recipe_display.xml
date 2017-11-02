@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="@string/recipes"
+            android:text="Recipes"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="50sp"
@@ -66,16 +66,17 @@
             android:hint="@string/enter_recipe_name"
             android:textSize="20sp"/>
         <Button
-            android:id="@+id/enter_instructions_button"
+            android:id="@+id/search_recipes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="enter"
+            android:layout_height="match_parent"
+            android:text="@string/search"
             android:textColor="@android:color/background_light"
             android:background="@color/colorAccent"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp" />
     </LinearLayout>
     <ListView
+        android:id="@+id/recipe_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_below="@id/layout_1">

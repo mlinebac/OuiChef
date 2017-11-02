@@ -22,7 +22,6 @@
     <string name="login">Login</string>
     <string name="qui_chef_nlogin">QUI CHEF  LOGIN</string>
     <string name="add_item">Add Item</string>
-    <string name="recipes">Recipes</string>
     <string name="order">Order</string>
     <string name="prep">PREP</string>
     <string name="_86">86</string>
@@ -38,5 +37,6 @@
     <string name="download_recipe">download recipe</string>
     <string name="enter_recipe_name">Enter Recipe Name</string>
     <string name="enter_recipes">Enter Recipes</string>
+    <string name="search">Search</string>
     <string name="recipes">Recipes</string>
 </resources>

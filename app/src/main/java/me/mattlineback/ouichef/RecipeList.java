@@ -29,7 +29,7 @@ public class RecipeList extends AppCompatActivity {
     DatabaseReference myRef;
 
     @BindView(R2.id.button_home) Button home;
-    @BindView(R2.id.recipe_view) ListView listView;
+    @BindView(R2.id.recipe_view_download) ListView listView;
     @BindView(R2.id.download_recipes_button) Button btnDownload;
     @BindView(R2.id.name_recipes) EditText recipeName;
 
@@ -42,7 +42,7 @@ public class RecipeList extends AppCompatActivity {
         ButterKnife.bind(this);
 
         this.mDB = FirebaseDatabase.getInstance();
-        this.myRef = mDB.getReference("Recipes");
+        this.myRef = mDB.getReference("recipes");
 
 /*
         final FirebaseListAdapter<Recipe> adapter = new FirebaseListAdapter<Recipe>(
