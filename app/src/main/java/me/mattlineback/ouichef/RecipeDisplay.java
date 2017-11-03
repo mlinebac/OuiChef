@@ -76,7 +76,7 @@ public class RecipeDisplay extends AppCompatActivity {
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
-            Intent intent = new Intent(RecipeDisplay.this, HomeScreen.class);
+            Intent intent = new Intent(RecipeDisplay.this, RecipeMenu.class);
             startActivity(intent);
             finish();
         }

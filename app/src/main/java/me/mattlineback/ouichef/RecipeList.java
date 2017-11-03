@@ -44,22 +44,6 @@ public class RecipeList extends AppCompatActivity {
         this.mDB = FirebaseDatabase.getInstance();
         this.myRef = mDB.getReference("recipes");
 
-/*
-        final FirebaseListAdapter<Recipe> adapter = new FirebaseListAdapter<Recipe>(
-                this, Recipe.class, R.layout.activity_recipe, myRef
-        ) {
-
-            @Override
-            protected void populateView(View v, Recipe model, int position) {
-                TextView listRecipe = v.findViewById(android.R.id.text1);
-                //listRecipe.setTextColor(Color.WHITE);
-                String str = model.getRecipeItem();
-                (listRecipe).setText(str);
-            }
-        };
-        listView.setAdapter(adapter);
-
-*/
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -86,7 +70,6 @@ public class RecipeList extends AppCompatActivity {
                 JSONObject row = rows.getJSONObject(r);
                 JSONArray columns = row.getJSONArray("c");
 
-                //int position = columns.getJSONObject(0).getInt("v");
                 String ingredient = columns.getJSONObject(1).getString("v");
                 int amount = columns.getJSONObject(2).getInt("v");
                 String unit = columns.getJSONObject(3).getString("v");
@@ -115,7 +98,7 @@ public class RecipeList extends AppCompatActivity {
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
-            Intent intent = new Intent(RecipeList.this, HomeScreen.class);
+            Intent intent = new Intent(RecipeList.this, RecipeMenu.class);
             startActivity(intent);
             finish();
         }
