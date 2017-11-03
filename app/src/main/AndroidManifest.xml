@@ -31,7 +31,8 @@
         <activity android:name=".OrderList" />
         <activity android:name=".EightySixBoard" />
         <activity android:name=".CreateRecipe" />
-        <activity android:name=".RecipeDisplay"></activity>
+        <activity android:name=".RecipeDisplay" />
+        <activity android:name=".RecipeMenu"></activity>
     </application>
 
 </manifest>
