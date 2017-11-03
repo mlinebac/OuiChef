@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +13,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +41,12 @@ public class RecipeDisplay extends AppCompatActivity {
     EditText searchRecipe;
     @BindView(R2.id.recipe_view)
     ListView recipeView;
+
+
+
     String recipe = "biscuits";
+
+
 
 
     @Override
@@ -52,14 +65,14 @@ public class RecipeDisplay extends AppCompatActivity {
                 String recipe = searchRecipe.getText().toString();
                 mRecipe = myRef.child(recipe);
 
-
-
             }
 
         });
+
         final FirebaseListAdapter<RecipeItem> adapter = new FirebaseListAdapter<RecipeItem>(
                 this, RecipeItem.class, android.R.layout.activity_list_item, mRecipe
         ) {
+
             @Override
             protected void populateView(View v, RecipeItem model, int position) {
                 TextView listRecipe = v.findViewById(android.R.id.text1);
