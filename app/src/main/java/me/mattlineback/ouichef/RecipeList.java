@@ -76,14 +76,14 @@ public class RecipeList extends AppCompatActivity {
                 String instruction = columns.getJSONObject(4).getString("v");
 
                 //entering recipe into database
-                String str = recipeName.getText().toString();
-                DatabaseReference recipeRef = myRef.child(str);
+                String name = recipeName.getText().toString();
+               // DatabaseReference recipeRef = myRef.child(str);
                 RecipeItem recipeItem;
                 recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
                 //adding each item to recipe
                 recipeItems.add(recipeItem);
                 //adding each item to recipe database
-                recipeRef.push().setValue(recipeItem);
+                myRef.child(name).push().setValue(recipeItem);
             }
 
             final RecipesAdapter adapter = new RecipesAdapter(this, R.layout.activity_recipe, recipeItems);
