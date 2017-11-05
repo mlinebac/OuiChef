@@ -44,7 +44,7 @@ public class RecipeDisplay extends AppCompatActivity {
 
 
 
-    String recipe = "biscuits";
+    String recipe = "jam";
 
 
 

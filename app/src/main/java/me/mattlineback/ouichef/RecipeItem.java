@@ -1,5 +1,6 @@
 package me.mattlineback.ouichef;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;

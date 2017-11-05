@@ -65,7 +65,8 @@ public class RecipeList extends AppCompatActivity {
     private void processJson(JSONObject object) {
         try {
             JSONArray rows = object.getJSONArray("rows");
-
+            String name= " ";
+            RecipeItem recipeItem;
             for (int r = 0; r < rows.length(); ++r) {
                 JSONObject row = rows.getJSONObject(r);
                 JSONArray columns = row.getJSONArray("c");
@@ -76,9 +77,7 @@ public class RecipeList extends AppCompatActivity {
                 String instruction = columns.getJSONObject(4).getString("v");
 
                 //entering recipe into database
-                String name = recipeName.getText().toString();
-               // DatabaseReference recipeRef = myRef.child(str);
-                RecipeItem recipeItem;
+                name = recipeName.getText().toString();
                 recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
                 //adding each item to recipe
                 recipeItems.add(recipeItem);
