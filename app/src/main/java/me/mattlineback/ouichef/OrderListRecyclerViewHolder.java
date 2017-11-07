@@ -24,14 +24,12 @@ import java.util.List;
 public class OrderListRecyclerViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "OrderListRecyclerViewHolder.class";
     public TextView listItem;
-    public Button deleteAllBtn;
     public ImageView deleteIcon;
 
     private List<ListItem> listObject;
     public OrderListRecyclerViewHolder(final View view, final List<ListItem> listObject){
         super(view);
         listItem = view.findViewById(R.id.list_item_view);
-        deleteAllBtn = view.findViewById(R.id.action_delete_all);
         deleteIcon = view.findViewById(R.id.list_item_delete);
         this.listObject = listObject;
 
@@ -40,14 +38,15 @@ public class OrderListRecyclerViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view){
                 Toast.makeText(view.getContext(), "Delete Icon has been clicked", Toast.LENGTH_LONG).show();
-                final String listItemString = listObject.get(getAdapterPosition()).getListItem();
+                String listItemString = listObject.get(getAdapterPosition()).getListItem();
                 Log.d(TAG, "Item = " + listItemString);
-                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-                Query query = dbRef.orderByChild("orderItems").equalTo(listItemString);
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("orderItems");
+                Query query = dbRef.orderByChild("listItem").equalTo(listItemString);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+                            Log.d(TAG, "item to remove on data change" + orderSnapshot.getRef());
                             orderSnapshot.getRef().removeValue();
                         }
                     }
@@ -59,12 +58,6 @@ public class OrderListRecyclerViewHolder extends RecyclerView.ViewHolder {
                     }
                 });
             }
-
-
         });
-
-
     }
-
-
 }

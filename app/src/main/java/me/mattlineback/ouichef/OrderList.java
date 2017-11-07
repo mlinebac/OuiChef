@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,11 +26,13 @@ import butterknife.OnClick;
 
 public class OrderList extends AppCompatActivity {
     private final String TAG = "OrderListActivity";
-
-    DatabaseReference myRef;
     private ListItemRecyclerViewAdapter listItemRecyclerViewAdapter;
     private List<ListItem> allItems;
+    private RecyclerView orderListRV;
+
+    DatabaseReference myRef;
     LinearLayoutManager linearLayoutManager;
+
     @BindView(R2.id.button_home)
     Button home;
     @BindView(R2.id.order_item_button)
@@ -37,10 +41,7 @@ public class OrderList extends AppCompatActivity {
     EditText addOrderItem;
     @BindView(R2.id.action_delete_all)
     Button deleteList;
-   // private RecyclerView orderListRV;
 
-    @BindView(R2.id.order_list)
-    RecyclerView orderListRV;
 
     /**
      * @param savedInstanceState
@@ -52,6 +53,7 @@ public class OrderList extends AppCompatActivity {
         ButterKnife.bind(this);
         allItems = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("orderItems");
+        orderListRV = findViewById(R.id.order_list);
         linearLayoutManager = new LinearLayoutManager(this);
         orderListRV.setLayoutManager(linearLayoutManager);
         listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
@@ -69,14 +71,21 @@ public class OrderList extends AppCompatActivity {
                 addOrderItem.setText("");
             }
         });
+        /*
+        deleteItemBtn.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+            String removeItem =
+            }
+        });
+        */
         deleteList.setOnClickListener(new View.OnClickListener() {
             /**
              * @param view
              */
             @Override
             public void onClick(View view) {
-                //this.items = new LinkedList<OrderItem>();
                 myRef.removeValue();
             }
         });
@@ -106,6 +115,7 @@ public class OrderList extends AppCompatActivity {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 ItemDeletion(dataSnapshot);
+
             }
 
             /**
@@ -139,24 +149,22 @@ public class OrderList extends AppCompatActivity {
         }
     }
 
-    /**
-     * @param dataSnapshot
-     */
     private void ItemDeletion(DataSnapshot dataSnapshot) {
         for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
             String item = orderSnapshot.getValue(String.class);
             for (int i = 0; i < allItems.size(); i++) {
                 if (allItems.get(i).getListItem().equals(item)) {
                     allItems.remove(i);
+                    myRef.child(item).removeValue();
                 }
             }
+            Log.d(TAG, "orderItem Removed" + item);
             listItemRecyclerViewAdapter.notifyDataSetChanged();
             listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
             orderListRV.setAdapter(listItemRecyclerViewAdapter);
         }
 
     }
-
 
     /**
      * Home button in view is clicked create new Intent with HomeScreen Class and start activity
