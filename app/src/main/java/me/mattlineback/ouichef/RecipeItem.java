@@ -58,7 +58,7 @@ public class RecipeItem {
     public String getRecipeItem(){
         return ingredient  + " " + amount + " " + unit + " " + instruction;
     }
-
+/*
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
@@ -69,5 +69,5 @@ public class RecipeItem {
 
         return result;
     }
-
+*/
 }

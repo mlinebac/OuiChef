@@ -78,7 +78,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/center_point"
         android:layout_alignLeft="@+id/center_point">
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/EightSix_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RecipeList extends AppCompatActivity {
+public class RecipeDownload extends AppCompatActivity {
     FirebaseDatabase mDB;
     DatabaseReference myRef;
 
@@ -38,7 +38,7 @@ public class RecipeList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recipe_list_layout);
+        setContentView(R.layout.recipe_download_layout);
         ButterKnife.bind(this);
 
         this.mDB = FirebaseDatabase.getInstance();
@@ -96,7 +96,7 @@ public class RecipeList extends AppCompatActivity {
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
-            Intent intent = new Intent(RecipeList.this, RecipeMenu.class);
+            Intent intent = new Intent(RecipeDownload.this, RecipeMenu.class);
             startActivity(intent);
             finish();
         }

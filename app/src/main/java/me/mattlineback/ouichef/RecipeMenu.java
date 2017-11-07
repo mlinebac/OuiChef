@@ -37,11 +37,11 @@ public class RecipeMenu extends AppCompatActivity {
     @OnClick({R2.id.button_search, R2.id.button_create, R2.id.button_upload, R2.id.button_home})
     public void submit(View view) {
         if (view == btnSearch) {
-            getIntent(RecipeDisplay.class);
+            getIntent(RecipeSearch.class);
         }else if (view == btnCreate){
             getIntent(RecipeCreate.class);
         }else if(view == btnUpload){
-            getIntent(RecipeList.class);
+            getIntent(RecipeDownload.class);
         }else{
             getIntent(HomeScreen.class);
         }

@@ -57,7 +57,7 @@ public class RecipeCreate extends AppCompatActivity {
         this.query = myRef.child("jam");
 
         FirebaseListOptions<RecipeItem> options = new FirebaseListOptions.Builder<RecipeItem>()
-                .setLayout(R.layout.recipe_list_layout)
+                .setLayout(R.layout.recipe_download_layout)
                 .setQuery(query.orderByKey(), RecipeItem.class)
                 .build();
         final FirebaseListAdapter<RecipeItem> adapter = new FirebaseListAdapter<RecipeItem>(options) {
@@ -81,7 +81,7 @@ public class RecipeCreate extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 RecipeItem newItem = dataSnapshot.getValue(RecipeItem.class);
-                Log.d(TAG, "Value is: " + newItem.toMap());
+                Log.d(TAG, "Value is: " + newItem);
             }
 
             @Override

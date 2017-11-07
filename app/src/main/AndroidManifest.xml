@@ -26,12 +26,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeScreen" />
-        <activity android:name=".RecipeList" />
+        <activity android:name=".RecipeDownload" />
         <activity android:name=".PrepList" />
         <activity android:name=".OrderList" />
         <activity android:name=".EightySixBoard" />
         <activity android:name=".RecipeCreate" />
-        <activity android:name=".RecipeDisplay" />
+        <activity android:name=".RecipeSearch" />
         <activity android:name=".RecipeMenu" />
     </application>
 
