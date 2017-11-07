@@ -3,7 +3,6 @@ package me.mattlineback.ouichef;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,16 +17,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 /**
- * Created by matt on 11/6/17.
+ * Created by mattlineback on 11/6/2017.
  */
 
-public class OrderListRecyclerViewHolder extends RecyclerView.ViewHolder {
-    private static final String TAG = "OrderListRecyclerViewHolder.class";
+public class PrepListHolder extends RecyclerView.ViewHolder {
+    private static final String TAG = "EightySixBoardHolder.class";
     public TextView listItem;
     public ImageView deleteIcon;
 
     private List<ListItem> listObject;
-    public OrderListRecyclerViewHolder(final View view, final List<ListItem> listObject){
+    public PrepListHolder(final View view, final List<ListItem> listObject){
         super(view);
         listItem = view.findViewById(R.id.list_item_view);
         deleteIcon = view.findViewById(R.id.list_item_delete);
@@ -40,7 +39,7 @@ public class OrderListRecyclerViewHolder extends RecyclerView.ViewHolder {
                 Toast.makeText(view.getContext(), "Delete Icon has been clicked", Toast.LENGTH_LONG).show();
                 String listItemString = listObject.get(getAdapterPosition()).getListItem();
                 Log.d(TAG, "Item = " + listItemString);
-                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("orderItems");
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("prepItems");
                 Query query = dbRef.orderByChild("listItem").equalTo(listItemString);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

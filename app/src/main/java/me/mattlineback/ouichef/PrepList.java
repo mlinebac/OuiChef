@@ -1,22 +1,23 @@
 package me.mattlineback.ouichef;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,8 +25,12 @@ import butterknife.OnClick;
 
 public class PrepList extends AppCompatActivity {
     private final String TAG = "prepListActivity";
-    FirebaseDatabase mDB;
+    private PrepListAdapter prepListAdapter;
+    private List<ListItem> allItems;
+    private RecyclerView prepListRV;
+
     DatabaseReference myRef;
+    LinearLayoutManager linearLayoutManager;
 
     @BindView(R2.id.button_home)
     Button home;
@@ -35,60 +40,95 @@ public class PrepList extends AppCompatActivity {
     EditText addPrepItem;
     @BindView(R2.id.action_delete_all)
     Button deleteList;
-    @BindView(R2.id.prep_list)
-    ListView prepList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prep_list);
         ButterKnife.bind(this);
+        allItems = new ArrayList<>();
+        myRef = FirebaseDatabase.getInstance().getReference("prepItems");
+        prepListRV = findViewById(R.id.prep_list);
+        linearLayoutManager = new LinearLayoutManager(this);
+        prepListRV.setLayoutManager(linearLayoutManager);
+        prepListAdapter = new PrepListAdapter(PrepList.this, allItems);
+        prepListRV.setAdapter(prepListAdapter);
 
-        this.mDB = FirebaseDatabase.getInstance();
-        this.myRef = mDB.getReference("prepList");
-        prepList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> parent, View view, int position, long id ){
-              TextView tv = view.findViewById(android.R.id.text1);
-              tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-              tv.setTextColor(Color.DKGRAY);
-          }
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param view
+             */
+            @Override
+            public void onClick(View view) {
+                String enteredItem = addPrepItem.getText().toString();
+                ListItem item = new ListItem(enteredItem);
+                myRef.push().setValue(item);
+                addPrepItem.setText("");
+            }
         });
-        //delete all items in database under prepList
         deleteList.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 myRef.removeValue();
             }
         });
-        // add items to database
-        addItemButton.setOnClickListener(new View.OnClickListener() {
+
+        myRef.addChildEventListener(new ChildEventListener() {
+
+
             @Override
-            public void onClick(View view) {
-                ListItem item = new ListItem(addPrepItem.getText().toString());
-                myRef.push().setValue(item);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                getAllItems(dataSnapshot);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                getAllItems(dataSnapshot);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                ItemDeletion(dataSnapshot);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
-        Query query = myRef;
+    }
 
-        FirebaseListOptions<ListItem> options = new FirebaseListOptions.Builder<ListItem>()
-                .setLayout(android.R.layout.activity_list_item)
-                .setQuery(query, ListItem.class)
-                .build();
-        final FirebaseListAdapter<ListItem> adapter = new FirebaseListAdapter<ListItem>(options) {
-            @Override
-            protected void populateView(View view, ListItem item, int i) {
-                TextView listItemShow = view.findViewById(android.R.id.text1);
-                listItemShow.setTextColor(Color.WHITE);
-                listItemShow.setAllCaps(true);
-                listItemShow.setTextSize(20);
-                //listItemShow.setPaintFlags(listItemShow.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                (listItemShow).setText(item.getListItem());
+    private void getAllItems(DataSnapshot dataSnapshot) {
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            String item = snapshot.getValue(String.class);
+            allItems.add(new ListItem(item));
+            prepListAdapter = new PrepListAdapter(PrepList.this, allItems);
+            prepListRV.setAdapter(prepListAdapter);
+        }
+    }
+
+    private void ItemDeletion(DataSnapshot dataSnapshot) {
+        for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+            String item = orderSnapshot.getValue(String.class);
+            for (int i = 0; i < allItems.size(); i++) {
+                if (allItems.get(i).getListItem().equals(item)) {
+                    allItems.remove(i);
+                    myRef.child(item).removeValue();
+                }
             }
-        };
-
-        prepList.setAdapter(adapter);
+            Log.d(TAG, "orderItem Removed" + item);
+            prepListAdapter.notifyDataSetChanged();
+            prepListAdapter = new PrepListAdapter(PrepList.this, allItems);
+            prepListRV.setAdapter(prepListAdapter);
+        }
 
     }
 

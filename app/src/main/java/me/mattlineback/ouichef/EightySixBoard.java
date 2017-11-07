@@ -1,37 +1,37 @@
 package me.mattlineback.ouichef;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.graphics.Color.DKGRAY;
-
 public class EightySixBoard extends AppCompatActivity {
-    private final String TAG = "prepListActivity";
-    FirebaseDatabase mDB;
-    DatabaseReference myRef;
+    private final String TAG = "EightySizBoardActivity";
+    private EightySixBoardAdapter eightySixBoardAdapter;
+    private List<ListItem> allItems;
+    private RecyclerView eightySixRV;
 
+    LinearLayoutManager linearLayoutManager;
+    DatabaseReference myRef;
 
     @BindView(R2.id.button_home) Button home;
     @BindView(R2.id.EightySix_item_button)
@@ -40,61 +40,101 @@ public class EightySixBoard extends AppCompatActivity {
     EditText addItem;
     @BindView(R2.id.action_delete_all)
     Button deleteList;
-    @BindView(R2.id.EightSix_list)
-    ListView eightySixList;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eighty_six_board);
         ButterKnife.bind(this);
-        this.mDB = FirebaseDatabase.getInstance();
-        this.myRef = mDB.getReference("eightySixList");
-        eightySixList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+        allItems = new ArrayList<>();
+        myRef = FirebaseDatabase.getInstance().getReference("eightSixItems");
+        eightySixRV = findViewById(R.id.EightSix_list);
+        linearLayoutManager = new LinearLayoutManager(this);
+        eightySixRV.setLayoutManager(linearLayoutManager);
+        eightySixBoardAdapter = new EightySixBoardAdapter(EightySixBoard.this, allItems);
+        eightySixRV.setAdapter(eightySixBoardAdapter);
+
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param view
+             */
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id ){
-                TextView tv = view.findViewById(android.R.id.text1);
-                tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                tv.setTextColor(DKGRAY);
+            public void onClick(View view) {
+                String enteredItem = addItem.getText().toString();
+                ListItem item = new ListItem(enteredItem);
+                myRef.push().setValue(item);
+                addItem.setText("");
             }
         });
-        //delete all items in database under prepList
         deleteList.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 myRef.removeValue();
             }
         });
-        // add items to database
-        addItemButton.setOnClickListener(new View.OnClickListener() {
+
+        myRef.addChildEventListener(new ChildEventListener() {
+
+
             @Override
-            public void onClick(View view) {
-                ListItem item = new ListItem(addItem.getText().toString());
-                myRef.push().setValue(item);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                getAllItems(dataSnapshot);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                getAllItems(dataSnapshot);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                ItemDeletion(dataSnapshot);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
-        Query query = myRef;
+    }
 
-        FirebaseListOptions<ListItem> options = new FirebaseListOptions.Builder<ListItem>()
-                .setLayout(android.R.layout.activity_list_item)
-                .setQuery(query, ListItem.class)
-                .build();
-        final FirebaseListAdapter<ListItem> adapter = new FirebaseListAdapter<ListItem>(options) {
-            @Override
-            protected void populateView(View view, ListItem item, int i) {
-                TextView listItemShow = view.findViewById(android.R.id.text1);
-                listItemShow.setTextColor(Color.WHITE);
-                listItemShow.setAllCaps(true);
-                listItemShow.setTextSize(20);
-                (listItemShow).setText(item.getListItem());
+    private void getAllItems(DataSnapshot dataSnapshot) {
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            String item = snapshot.getValue(String.class);
+            allItems.add(new ListItem(item));
+            eightySixBoardAdapter = new EightySixBoardAdapter(EightySixBoard.this, allItems);
+            eightySixRV.setAdapter(eightySixBoardAdapter);
+        }
+    }
+
+    private void ItemDeletion(DataSnapshot dataSnapshot) {
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            String item = snapshot.getValue(String.class);
+            for (int i = 0; i < allItems.size(); i++) {
+                if (allItems.get(i).getListItem().equals(item)) {
+                    allItems.remove(i);
+                    myRef.child(item).removeValue();
+                }
             }
-        };
-
-        eightySixList.setAdapter(adapter);
+            Log.d(TAG, "eighty six Item Removed" + item);
+            eightySixBoardAdapter.notifyDataSetChanged();
+            eightySixBoardAdapter = new EightySixBoardAdapter(EightySixBoard.this, allItems);
+            eightySixRV.setAdapter(eightySixBoardAdapter);
+        }
 
     }
+
+
+
+
 
     @OnClick(R2.id.button_home)
     public void submit(View view) {

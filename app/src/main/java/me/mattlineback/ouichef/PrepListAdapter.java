@@ -9,27 +9,27 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by matt on 11/6/17.
+ * Created by mattlineback on 11/6/2017.
  */
 
-public class ListItemRecyclerViewAdapter extends RecyclerView.Adapter<OrderListRecyclerViewHolder> {
+public class PrepListAdapter extends  RecyclerView.Adapter<PrepListHolder>{
 
     private List<ListItem> item;
     protected Context context;
 
-    public ListItemRecyclerViewAdapter(Context context, List<ListItem> item){
+    public PrepListAdapter(Context context, List<ListItem> item){
         this.item = item;
         this.context = context;
     }
     @Override
-    public OrderListRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        OrderListRecyclerViewHolder viewHolder = null;
+    public PrepListHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        PrepListHolder viewHolder = null;
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout, parent, false);
-        viewHolder = new OrderListRecyclerViewHolder(layoutView, item);
+        viewHolder = new PrepListHolder(layoutView, item);
         return viewHolder;
     }
     @Override
-    public void onBindViewHolder(OrderListRecyclerViewHolder holder, int position){
+    public void onBindViewHolder(PrepListHolder holder, int position){
         holder.listItem.setText(item.get(position).getListItem());
     }
 
@@ -38,3 +38,4 @@ public class ListItemRecyclerViewAdapter extends RecyclerView.Adapter<OrderListR
         return this.item.size();
     }
 }
+

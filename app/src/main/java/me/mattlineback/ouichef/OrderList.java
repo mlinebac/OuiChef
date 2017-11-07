@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +25,7 @@ import butterknife.OnClick;
 
 public class OrderList extends AppCompatActivity {
     private final String TAG = "OrderListActivity";
-    private ListItemRecyclerViewAdapter listItemRecyclerViewAdapter;
+    private OrderListAdapter orderListAdapter;
     private List<ListItem> allItems;
     private RecyclerView orderListRV;
 
@@ -56,8 +55,8 @@ public class OrderList extends AppCompatActivity {
         orderListRV = findViewById(R.id.order_list);
         linearLayoutManager = new LinearLayoutManager(this);
         orderListRV.setLayoutManager(linearLayoutManager);
-        listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
-        orderListRV.setAdapter(listItemRecyclerViewAdapter);
+        orderListAdapter = new OrderListAdapter(OrderList.this, allItems);
+        orderListRV.setAdapter(orderListAdapter);
 
         addItemButton.setOnClickListener(new View.OnClickListener() {
             /**
@@ -71,15 +70,6 @@ public class OrderList extends AppCompatActivity {
                 addOrderItem.setText("");
             }
         });
-        /*
-        deleteItemBtn.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-            String removeItem =
-            }
-        });
-        */
         deleteList.setOnClickListener(new View.OnClickListener() {
             /**
              * @param view
@@ -144,8 +134,8 @@ public class OrderList extends AppCompatActivity {
         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
             String item = snapshot.getValue(String.class);
             allItems.add(new ListItem(item));
-            listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
-            orderListRV.setAdapter(listItemRecyclerViewAdapter);
+            orderListAdapter = new OrderListAdapter(OrderList.this, allItems);
+            orderListRV.setAdapter(orderListAdapter);
         }
     }
 
@@ -159,9 +149,9 @@ public class OrderList extends AppCompatActivity {
                 }
             }
             Log.d(TAG, "orderItem Removed" + item);
-            listItemRecyclerViewAdapter.notifyDataSetChanged();
-            listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
-            orderListRV.setAdapter(listItemRecyclerViewAdapter);
+            orderListAdapter.notifyDataSetChanged();
+            orderListAdapter = new OrderListAdapter(OrderList.this, allItems);
+            orderListRV.setAdapter(orderListAdapter);
         }
 
     }
