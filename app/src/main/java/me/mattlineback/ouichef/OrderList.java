@@ -1,20 +1,22 @@
 package me.mattlineback.ouichef;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,34 +24,56 @@ import butterknife.OnClick;
 
 public class OrderList extends AppCompatActivity {
     private final String TAG = "OrderListActivity";
-    FirebaseDatabase mDB;
+
     DatabaseReference myRef;
+    private ListItemRecyclerViewAdapter listItemRecyclerViewAdapter;
+    private List<ListItem> allItems;
+    LinearLayoutManager linearLayoutManager;
+    @BindView(R2.id.button_home)
+    Button home;
+    @BindView(R2.id.order_item_button)
+    Button addItemButton;
+    @BindView(R2.id.add_order_item)
+    EditText addOrderItem;
+    @BindView(R2.id.action_delete_all)
+    Button deleteList;
+   // private RecyclerView orderListRV;
 
-    @BindView(R2.id.button_home) Button home;
-    @BindView(R2.id.order_item_button) Button addItemButton;
-    @BindView(R2.id.add_order_item) EditText addOrderItem;
-    @BindView(R2.id.action_delete_all) Button deleteList;
-    @BindView(R2.id.order_list) ListView orderList;
+    @BindView(R2.id.order_list)
+    RecyclerView orderListRV;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
         ButterKnife.bind(this);
+        allItems = new ArrayList<>();
+        myRef = FirebaseDatabase.getInstance().getReference("orderItems");
+        linearLayoutManager = new LinearLayoutManager(this);
+        orderListRV.setLayoutManager(linearLayoutManager);
+        listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
+        orderListRV.setAdapter(listItemRecyclerViewAdapter);
 
-        this.mDB = FirebaseDatabase.getInstance();
-        this.myRef = mDB.getReference("orderList");
-
-        orderList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param view
+             */
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id ){
-                TextView tv = view.findViewById(android.R.id.text1);
-                tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                tv.setTextColor(Color.DKGRAY);
+            public void onClick(View view) {
+                String enteredItem = addOrderItem.getText().toString();
+                ListItem item = new ListItem(enteredItem);
+                myRef.push().setValue(item);
+                addOrderItem.setText("");
             }
         });
 
         deleteList.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 //this.items = new LinkedList<OrderItem>();
@@ -57,33 +81,87 @@ public class OrderList extends AppCompatActivity {
             }
         });
 
-        addItemButton.setOnClickListener(new View.OnClickListener() {
+        myRef.addChildEventListener(new ChildEventListener() {
+            /**
+             * @param dataSnapshot
+             * @param s
+             */
             @Override
-            public void onClick(View view) {
-                ListItem item = new ListItem(addOrderItem.getText().toString());
-                myRef.push().setValue(item);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                getAllItems(dataSnapshot);
+            }
+
+            /**
+             * @param dataSnapshot
+             * @param s
+             */
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                getAllItems(dataSnapshot);
+            }
+
+            /**
+             * @param dataSnapshot
+             */
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                ItemDeletion(dataSnapshot);
+            }
+
+            /**
+             * @param dataSnapshot
+             * @param s
+             */
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            /**
+             * @param databaseError
+             */
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
-        final FirebaseListAdapter<ListItem> adapter = new FirebaseListAdapter<ListItem>(
-                this, ListItem.class, android.R.layout.activity_list_item, myRef
+    }
+    /**
+     * @param dataSnapshot
+     */
+    private void getAllItems(DataSnapshot dataSnapshot) {
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            String item = snapshot.getValue(String.class);
+            allItems.add(new ListItem(item));
+            listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
+            orderListRV.setAdapter(listItemRecyclerViewAdapter);
+        }
+    }
 
-        ) {
-            @Override
-            protected void populateView(View view, ListItem item, int i) {
-                TextView listItemShow = view.findViewById(android.R.id.text1);
-                listItemShow.setTextColor(Color.WHITE);
-                listItemShow.setAllCaps(true);
-                listItemShow.setTextSize(20);
-                //listItemShow.setPaintFlags(listItemShow.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                (listItemShow).setText(item.getListItem());
+    /**
+     * @param dataSnapshot
+     */
+    private void ItemDeletion(DataSnapshot dataSnapshot) {
+        for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+            String item = orderSnapshot.getValue(String.class);
+            for (int i = 0; i < allItems.size(); i++) {
+                if (allItems.get(i).getListItem().equals(item)) {
+                    allItems.remove(i);
+                }
             }
-        };
-
-        orderList.setAdapter(adapter);
+            listItemRecyclerViewAdapter.notifyDataSetChanged();
+            listItemRecyclerViewAdapter = new ListItemRecyclerViewAdapter(OrderList.this, allItems);
+            orderListRV.setAdapter(listItemRecyclerViewAdapter);
+        }
 
     }
 
+
+    /**
+     * Home button in view is clicked create new Intent with HomeScreen Class and start activity
+     * @param view
+     */
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
@@ -93,3 +171,4 @@ public class OrderList extends AppCompatActivity {
         }
     }
 }
+

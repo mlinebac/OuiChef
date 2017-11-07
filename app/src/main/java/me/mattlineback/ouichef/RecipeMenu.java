@@ -39,7 +39,7 @@ public class RecipeMenu extends AppCompatActivity {
         if (view == btnSearch) {
             getIntent(RecipeDisplay.class);
         }else if (view == btnCreate){
-            getIntent(CreateRecipe.class);
+            getIntent(RecipeCreate.class);
         }else if(view == btnUpload){
             getIntent(RecipeList.class);
         }else{

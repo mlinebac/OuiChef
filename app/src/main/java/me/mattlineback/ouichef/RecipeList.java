@@ -38,7 +38,7 @@ public class RecipeList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_list);
+        setContentView(R.layout.recipe_list_layout);
         ButterKnife.bind(this);
 
         this.mDB = FirebaseDatabase.getInstance();
@@ -53,7 +53,6 @@ public class RecipeList extends AppCompatActivity {
         }
 
     }
-
     public void buttonClickHandler(View view) {
         new DownloadWebpageTask(new AsyncResult() {
             @Override

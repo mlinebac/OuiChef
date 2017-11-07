@@ -16,8 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,11 +75,13 @@ public class EightySixBoard extends AppCompatActivity {
                 myRef.push().setValue(item);
             }
         });
+        Query query = myRef;
 
-        final FirebaseListAdapter<ListItem> adapter = new FirebaseListAdapter<ListItem>(
-                this, ListItem.class, android.R.layout.activity_list_item, myRef
-
-        ) {
+        FirebaseListOptions<ListItem> options = new FirebaseListOptions.Builder<ListItem>()
+                .setLayout(android.R.layout.activity_list_item)
+                .setQuery(query, ListItem.class)
+                .build();
+        final FirebaseListAdapter<ListItem> adapter = new FirebaseListAdapter<ListItem>(options) {
             @Override
             protected void populateView(View view, ListItem item, int i) {
                 TextView listItemShow = view.findViewById(android.R.id.text1);
