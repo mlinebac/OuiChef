@@ -77,7 +77,7 @@ public class RecipeDownload extends AppCompatActivity {
 
                 //entering recipe into database
                 name = recipeName.getText().toString();
-                recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
+                recipeItem = new RecipeItem(name, ingredient, amount, unit, instruction);
                 //adding each item to recipe
                 recipeItems.add(recipeItem);
                 //adding each item to recipe database

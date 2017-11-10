@@ -11,17 +11,24 @@ import java.util.Map;
  */
 
 public class RecipeItem {
-    private String ingredient, unit, instruction;
+    private String name, ingredient, unit, instruction;
     private int amount;
 
 
-    RecipeItem(String ingredient, int amount, String unit, String instruction){
+    RecipeItem(String name, String ingredient, int amount, String unit, String instruction){
+        this.setName(name);
         this.setIngredient(ingredient);
         this.setAmount(amount);
         this.setUnit(unit);
         this.setInstruction(instruction);
     }
     public RecipeItem(){
+    }
+    String getName(){
+        return name;
+    }
+    private void setName(String name){
+        this.name = name;
     }
     String getIngredient(){
         return ingredient;
