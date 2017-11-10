@@ -2,17 +2,19 @@ package me.mattlineback.ouichef;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,46 +44,35 @@ public class RecipeCreate extends AppCompatActivity {
     @BindView(R2.id.recipe_view_create)
     ListView recipeView;
     String TAG = "createRecipe : ";
-    private DatabaseReference myRef;
-    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mRef;
+    //ListAdapter adapter;
     private Query query;
-    String recipeChild =" ";
+    String recipeChild ="jam";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
         ButterKnife.bind(this);
 
-        this.mFirebaseDatabase = FirebaseDatabase.getInstance();
-        this.myRef = mFirebaseDatabase.getReference("recipes");
-        this.query = myRef.child("jam");
+        this.mRef = FirebaseDatabase.getInstance().getReference("recipes");
+        this.query = mRef.child("jam");
 
-        FirebaseListOptions<RecipeItem> options = new FirebaseListOptions.Builder<RecipeItem>()
-                .setLayout(R.layout.recipe_download_layout)
-                .setQuery(query.orderByKey(), RecipeItem.class)
-                .build();
-        final FirebaseListAdapter<RecipeItem> adapter = new FirebaseListAdapter<RecipeItem>(options) {
-            @Override
-            protected void populateView(View view, RecipeItem item, int i) {
-                Log.d(TAG, "populate Value is: " + item);
-                TextView listItemShow = view.findViewById(android.R.id.text1);
-                listItemShow.setTextColor(Color.WHITE);
-                listItemShow.setAllCaps(true);
-                listItemShow.setTextSize(20);
-                //listItemShow.setPaintFlags(listItemShow.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                listItemShow.setText(item.getRecipeItem());
-            }
-        };
+       final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
 
         recipeView.setAdapter(adapter);
 
 
-        query.orderByKey().addChildEventListener(new ChildEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                RecipeItem newItem = dataSnapshot.getValue(RecipeItem.class);
-                Log.d(TAG, "Value is: " + newItem);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    String newItem = snapshot.getValue().toString();
+                    adapter.add(newItem);
+                    Log.d(TAG, "Value is: " + newItem);
+                }
+
             }
 
             @Override
@@ -111,19 +102,23 @@ public class RecipeCreate extends AppCompatActivity {
             public void onClick(View view){
                 String newRecipeName =  recipeName.getText().toString();
                 // myRef.push().setValue(newRecipeName);
-                //setRecipeChild(newRecipeName);
+                setRecipeChild(newRecipeName);
                 String ingredient = recipeIngredient.getText().toString();
+                recipeIngredient.setText("");
                 int amount = Integer.parseInt(recipeAmt.getText().toString());
+                recipeAmt.setText("");
                 String unit = recipeUnit.getText().toString();
+                recipeUnit.setText("");
                 String instruction = recipeInstructions.getText().toString();
+                recipeInstructions.setText("");
                 RecipeItem newRecipeItem = new RecipeItem(ingredient,amount,unit,instruction);
-                myRef.child(newRecipeName).push().setValue(newRecipeItem);
+                mRef.child(recipeChild).push().setValue(newRecipeItem);
             }
         });
     }
 
     public void setRecipeChild(String str){
-        this.recipeChild = recipeName.getText().toString();
+        this.recipeChild = str;
 
     }
     @OnClick(R2.id.button_home)
