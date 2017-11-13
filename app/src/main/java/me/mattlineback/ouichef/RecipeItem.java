@@ -15,21 +15,21 @@ public class RecipeItem {
     private int amount;
 
 
-    RecipeItem(String name, String ingredient, int amount, String unit, String instruction){
-        this.setName(name);
-        this.setIngredient(ingredient);
-        this.setAmount(amount);
-        this.setUnit(unit);
-        this.setInstruction(instruction);
+    RecipeItem( String ingredient, int amount, String unit, String instruction){
+       // this.setName(name);
+        this.ingredient = ingredient;
+        this.amount = amount;
+        this.unit = unit;
+        this.instruction = instruction;
     }
     public RecipeItem(){
     }
     String getName(){
         return name;
     }
-    private void setName(String name){
-        this.name = name;
-    }
+    //private void setName(String name){
+     //   this.name = name;
+   // }
     String getIngredient(){
         return ingredient;
     }
@@ -65,7 +65,7 @@ public class RecipeItem {
     public String getRecipeItem(){
         return ingredient  + " " + amount + " " + unit + " " + instruction;
     }
-/*
+
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
@@ -76,5 +76,5 @@ public class RecipeItem {
 
         return result;
     }
-*/
+
 }

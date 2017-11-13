@@ -144,10 +144,9 @@
             android:layout_toEndOf="@+id/enter_instructions"
             android:layout_marginStart="10dp" />
     </RelativeLayout>
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_view_create"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/relative_02">
-    </ListView>
+        android:layout_below="@id/relative_02"/>
 </RelativeLayout>

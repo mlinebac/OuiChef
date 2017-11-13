@@ -6,10 +6,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,17 +30,25 @@ public class RecipeDownload extends AppCompatActivity {
     DatabaseReference myRef;
 
     @BindView(R2.id.button_home) Button home;
-    @BindView(R2.id.recipe_view_download) ListView listView;
+    @BindView(R2.id.recipe_view_download)
+    RecyclerView recipeRecyclerView;
     @BindView(R2.id.download_recipes_button) Button btnDownload;
     @BindView(R2.id.name_recipes) EditText recipeName;
 
-    ArrayList<RecipeItem> recipeItems = new ArrayList<>();
+    ArrayList<RecipeItem> recipeItems;
+    LinearLayoutManager linearLayoutManager;
+    RecipesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_download_layout);
         ButterKnife.bind(this);
+        recipeItems = new ArrayList<>();
+        linearLayoutManager = new LinearLayoutManager(this);
+        recipeRecyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new RecipesAdapter(RecipeDownload.this, recipeItems);
+        recipeRecyclerView.setAdapter(adapter);
 
         this.mDB = FirebaseDatabase.getInstance();
         this.myRef = mDB.getReference("recipes");
@@ -64,7 +73,7 @@ public class RecipeDownload extends AppCompatActivity {
     private void processJson(JSONObject object) {
         try {
             JSONArray rows = object.getJSONArray("rows");
-            String name= " ";
+            String name;
             RecipeItem recipeItem;
             for (int r = 0; r < rows.length(); ++r) {
                 JSONObject row = rows.getJSONObject(r);
@@ -77,16 +86,12 @@ public class RecipeDownload extends AppCompatActivity {
 
                 //entering recipe into database
                 name = recipeName.getText().toString();
-                recipeItem = new RecipeItem(name, ingredient, amount, unit, instruction);
+                recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
                 //adding each item to recipe
                 recipeItems.add(recipeItem);
                 //adding each item to recipe database
                 myRef.child(name).push().setValue(recipeItem);
             }
-
-            final RecipesAdapter adapter = new RecipesAdapter(this, R.layout.activity_recipe, recipeItems);
-            listView.setAdapter(adapter);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
