@@ -27,7 +27,7 @@ public class PrepList extends AppCompatActivity {
     private final String TAG = "prepListActivity";
     private PrepListAdapter prepListAdapter;
     private List<ListItem> allItems;
-    private RecyclerView prepListRV;
+
 
     DatabaseReference myRef;
     LinearLayoutManager linearLayoutManager;
@@ -40,6 +40,8 @@ public class PrepList extends AppCompatActivity {
     EditText addPrepItem;
     @BindView(R2.id.action_delete_all)
     Button deleteList;
+    @BindView(R2.id.prep_list)
+    RecyclerView prepListRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,6 @@ public class PrepList extends AppCompatActivity {
         ButterKnife.bind(this);
         allItems = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("prepItems");
-        prepListRV = findViewById(R.id.prep_list);
         linearLayoutManager = new LinearLayoutManager(this);
         prepListRV.setLayoutManager(linearLayoutManager);
         prepListAdapter = new PrepListAdapter(PrepList.this, allItems);

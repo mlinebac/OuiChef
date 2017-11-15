@@ -1,23 +1,15 @@
 package me.mattlineback.ouichef;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,9 +66,7 @@ public class RecipeCreate extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String newRecipeName = recipeName.getText().toString();
-                // myRef.push().setValue(newRecipeName);
                 setRecipeChild(newRecipeName);
-
                 String ingredient = recipeIngredient.getText().toString();
                 recipeIngredient.setText("");
                 int amount = Integer.parseInt(recipeAmt.getText().toString());
@@ -87,7 +77,6 @@ public class RecipeCreate extends AppCompatActivity {
                 recipeInstructions.setText("");
                 RecipeItem newRecipeItem = new RecipeItem(ingredient, amount, unit, instruction);
                 myRef.child(recipeChild).push().setValue(newRecipeItem);
-                //adapter.startListening();
             }
         });
 
@@ -136,13 +125,6 @@ public class RecipeCreate extends AppCompatActivity {
         this.recipeChild = str;
 
     }
-   // @Override
-   // public void onStop(){
-     //   super.onStop();
-       // if(adapter != null){
-            //adapter.stopListening();
-     //   }
-   // }
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {

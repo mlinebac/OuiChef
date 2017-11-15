@@ -13,7 +13,8 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home"/>
+        android:text="@string/home"
+        android:layout_marginStart="10dp" />
     <Button
         android:id="@+id/action_delete_all"
         style="?android:textAppearanceLarge"

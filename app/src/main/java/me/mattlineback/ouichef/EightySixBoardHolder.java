@@ -32,7 +32,6 @@ public class EightySixBoardHolder extends RecyclerView.ViewHolder {
         deleteIcon = view.findViewById(R.id.list_item_delete);
         this.listObject = listObject;
 
-
         deleteIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

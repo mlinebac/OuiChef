@@ -132,10 +132,6 @@ public class EightySixBoard extends AppCompatActivity {
 
     }
 
-
-
-
-
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {

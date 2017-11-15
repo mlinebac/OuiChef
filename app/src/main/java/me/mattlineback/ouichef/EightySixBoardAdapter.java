@@ -23,7 +23,7 @@ public class EightySixBoardAdapter extends  RecyclerView.Adapter<EightySixBoardH
     }
     @Override
     public EightySixBoardHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        EightySixBoardHolder viewHolder = null;
+        EightySixBoardHolder viewHolder;
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout, parent, false);
         viewHolder = new EightySixBoardHolder(layoutView, item);
         return viewHolder;

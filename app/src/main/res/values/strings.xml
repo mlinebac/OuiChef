@@ -37,6 +37,17 @@
     <string name="download_recipe">download recipe</string>
     <string name="enter_recipe_name">Enter Recipe Name</string>
     <string name="enter_recipes">Enter Recipes</string>
+    <string name="enter_instructions">Enter instructions</string>
+    <string name="enter_new_recipe_name_here">Enter new recipe name here</string>
+    <string name="enter">enter</string>
+    <string name="enter_ingredient">Enter Ingredient</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="enter_unit">Enter unit</string>
+    <string name="create_recipe">Create Recipe</string>
+    <string name="recipe_menu">Recipe Menu</string>
     <string name="search">Search</string>
+    <string name="create">Create</string>
+    <string name="upload">upload</string>
     <string name="recipes">Recipes</string>
+    <string name="delete">DELETE</string>
 </resources>

@@ -35,7 +35,8 @@
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"
             android:padding="10dp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:ignore="InvalidImeActionId" />
         <Button
             android:id="@+id/email_sign_in_button"
             style="?android:textAppearanceLarge"

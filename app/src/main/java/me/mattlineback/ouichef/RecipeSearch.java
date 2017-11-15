@@ -28,7 +28,11 @@ public class RecipeSearch extends AppCompatActivity {
 
     DatabaseReference myRef;
     Query query;
-    Query querySearch;
+    ArrayList<RecipeItem> recipeList;
+    RecipesAdapter adapter;
+    String recipe = " ";
+    LinearLayoutManager linearLayoutManager;
+
     @BindView(R2.id.button_home)
     Button home;
     @BindView(R2.id.double_button)
@@ -40,10 +44,6 @@ public class RecipeSearch extends AppCompatActivity {
     @BindView(R2.id.recipe_view)
     RecyclerView recipeView;
 
-    ArrayList<RecipeItem> recipeList;
-    RecipesAdapter adapter;
-    String recipe = " ";
-    LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class RecipeSearch extends AppCompatActivity {
         recipeView.setAdapter(adapter);
         this.myRef = FirebaseDatabase.getInstance().getReference("recipes");
         query = myRef.orderByKey();
-        querySearch = myRef.child("recipeSearch");
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +69,10 @@ public class RecipeSearch extends AppCompatActivity {
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
                 if (dataSnapshot.getKey().equals(recipe)) {
                     getAllItems(dataSnapshot);
-
                     }
-
                 }
-
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {

@@ -23,7 +23,7 @@ public class PrepListAdapter extends  RecyclerView.Adapter<PrepListHolder>{
     }
     @Override
     public PrepListHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        PrepListHolder viewHolder = null;
+        PrepListHolder viewHolder;
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout, parent, false);
         viewHolder = new PrepListHolder(layoutView, item);
         return viewHolder;
