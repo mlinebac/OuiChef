@@ -1,10 +1,12 @@
 package me.mattlineback.ouichef;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,11 +32,18 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListHolder> {
     }
     @Override
     public void onBindViewHolder(OrderListHolder holder, int position){
+        editView(holder.listItem);
         holder.listItem.setText(item.get(position).getListItem());
     }
 
     @Override
     public int getItemCount() {
         return this.item.size();
+    }
+
+    private void editView(TextView tv){
+        tv.setTextColor(Color.WHITE);
+        tv.setAllCaps(true);
+        tv.setTextSize(20);
     }
 }
