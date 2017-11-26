@@ -37,8 +37,8 @@ public class RecipeSearch extends AppCompatActivity {
 
     @BindView(R2.id.button_home)
     Button home;
-   @BindView(R2.id.double_button)
-   Button doubleButton;
+    @BindView(R2.id.double_button)
+    Button doubleButton;
     @BindView(R2.id.search_recipes)
     Button searchBtn;
     @BindView(R2.id.name_recipes)
@@ -146,13 +146,16 @@ public class RecipeSearch extends AppCompatActivity {
         });
             }//onCreate
                 private void doubleItems(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    recipeList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         RecipeItem item = snapshot.getValue(RecipeItem.class);
+                        if (item == null) throw new AssertionError();
                         int amount = item.getAmount();
                         item.doubleAmount(amount);
                         Log.d(TAG, "doubled Amount = " + item.getAmount());
                         recipeList.add(item);
                     }
+
                     adapter.notifyDataSetChanged();
                     adapter = new RecipesAdapter(RecipeSearch.this, recipeList);
                     recipeView.setAdapter(adapter);

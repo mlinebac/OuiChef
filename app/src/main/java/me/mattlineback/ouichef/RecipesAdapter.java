@@ -55,10 +55,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHo
             instruction = view.findViewById(R.id.instruction);
             editView(instruction);
 
-
-
-
-
         }
     }
 
