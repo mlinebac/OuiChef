@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -32,11 +33,12 @@ public class RecipeSearch extends AppCompatActivity {
     RecipesAdapter adapter;
     String recipe = " ";
     LinearLayoutManager linearLayoutManager;
+    String TAG = "RecipeSearch";
 
     @BindView(R2.id.button_home)
     Button home;
-    @BindView(R2.id.double_button)
-    Button doubleButton;
+   @BindView(R2.id.double_button)
+   Button doubleButton;
     @BindView(R2.id.search_recipes)
     Button searchBtn;
     @BindView(R2.id.name_recipes)
@@ -60,6 +62,41 @@ public class RecipeSearch extends AppCompatActivity {
         this.myRef = FirebaseDatabase.getInstance().getReference("recipes");
         query = myRef.orderByKey();
 
+        doubleButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            query.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getKey().equals(recipe)) {
+                        doubleItems(dataSnapshot);
+                    }
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getKey().equals(recipe)) {
+                        doubleItems(dataSnapshot);
+                    }
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,17 +144,34 @@ public class RecipeSearch extends AppCompatActivity {
         });
             }
         });
-    }//onCreate
-    private void getAllItems(DataSnapshot dataSnapshot) {
-        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-            RecipeItem item = snapshot.getValue(RecipeItem.class);
-            recipeList.add(item);
-            String TAG = "RecipeSearch";
-            Log.d(TAG, "recipeItem Added" + item);
-        }
-        adapter.notifyDataSetChanged();
-        adapter = new RecipesAdapter(RecipeSearch.this, recipeList);
-        recipeView.setAdapter(adapter);
+            }//onCreate
+                private void doubleItems(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        RecipeItem item = snapshot.getValue(RecipeItem.class);
+                        int amount = item.getAmount();
+                        item.doubleAmount(amount);
+                        Log.d(TAG, "doubled Amount = " + item.getAmount());
+                        recipeList.add(item);
+                    }
+                    adapter.notifyDataSetChanged();
+                    adapter = new RecipesAdapter(RecipeSearch.this, recipeList);
+                    recipeView.setAdapter(adapter);
+                }
+                private void getAllItems(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        RecipeItem item = snapshot.getValue(RecipeItem.class);
+                        recipeList.add(item);
+
+                        Log.d(TAG, "recipeItem Added" + item);
+                    }
+                    adapter.notifyDataSetChanged();
+                    adapter = new RecipesAdapter(RecipeSearch.this, recipeList);
+                    recipeView.setAdapter(adapter);
+                }
+
+
+    public String getRecipe(){
+        return this.recipe;
     }
     @OnClick(R2.id.button_home)
     public void submit(View view) {

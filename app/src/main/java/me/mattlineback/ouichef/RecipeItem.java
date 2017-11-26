@@ -38,7 +38,9 @@ public class RecipeItem {
     private void setAmount(int amount){
         this.amount = amount;
     }
-
+    public void doubleAmount(int amount){
+        setAmount(amount*2);
+    }
     String getUnit(){
         return unit;
     }
