@@ -12,7 +12,8 @@ import butterknife.OnClick;
 
 
 public class HomeScreen extends AppCompatActivity{
-    @BindView(R2.id.button_recipes) Button recipes;
+    @BindView(R2.id.button_recipes)
+    Button recipes;
     @BindView(R2.id.button_prep) Button prep;
     @BindView(R2.id.button_order) Button order;
     @BindView(R2.id.button_86) Button eightySix;

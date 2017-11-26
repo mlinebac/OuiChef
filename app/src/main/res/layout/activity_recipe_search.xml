@@ -74,11 +74,28 @@
             android:background="@color/colorAccent"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp" />
+
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/recipe_title_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_1"
+        android:layout_margin="20dp">
+        <TextView
+            android:id="@+id/recipe_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_below="@id/layout_1"/>
+        android:layout_below="@id/recipe_title_layout"/>
 
 </RelativeLayout>

@@ -41,10 +41,9 @@ public class RecipeCreate extends AppCompatActivity {
     @BindView(R2.id.recipe_view_create)
     RecyclerView recipeView;
 
-    String TAG = "createRecipe";
+    private String TAG = "createRecipe";
     private DatabaseReference myRef;
     RecipesAdapter adapter;
-    private Query query;
     String recipeChild = " ";
     ArrayList<RecipeItem> recipeList;
     LinearLayoutManager linearLayoutManager;
@@ -60,7 +59,7 @@ public class RecipeCreate extends AppCompatActivity {
         adapter = new RecipesAdapter(this, recipeList);
         recipeView.setAdapter(adapter);
         this.myRef = FirebaseDatabase.getInstance().getReference("recipes");
-        query = myRef.orderByKey();
+        Query query = myRef.orderByKey();
         Log.d(TAG, "query = " + query);
         recipeNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -29,7 +29,7 @@ import static android.support.v7.widget.RecyclerView.*;
 public class EightySixBoardAdapter extends RecyclerView.Adapter<EightySixBoardAdapter.EightySixBoardHolder>{
 
     private List<ListItem> item;
-    protected Context context;
+    private Context context;
 
     EightySixBoardAdapter(Context context, List<ListItem> item){
         this.item = item;

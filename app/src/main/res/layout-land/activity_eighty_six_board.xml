@@ -22,11 +22,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
-        android:id="@+id/left_linearLayout"
         android:layout_alignEnd="@+id/center_point"
         android:layout_alignRight="@+id/center_point">
         <TextView
-            android:id="@+id/title_86_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -37,7 +35,6 @@
             android:text="@string/_86_list"/>
 
         <EditText
-            android:id="@+id/list_86_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background= "@android:color/white"
@@ -47,7 +44,6 @@
             android:inputType="text"
             android:hint="@string/enter_item_to_86"/>
         <Button
-            android:id="@+id/EightySix_item_button"
             style="?android:textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +54,6 @@
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
         <Button
-            android:id="@+id/action_delete_all"
             style="?android:textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +65,6 @@
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/right_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

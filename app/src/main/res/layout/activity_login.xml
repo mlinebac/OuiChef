@@ -13,6 +13,7 @@
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:padding="30dp"
+        android:layout_margin="50dp"
         android:id="@+id/linearLayout">
 
         <EditText
@@ -53,10 +54,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lines = "2"
-        android:text="@string/qui_chef_nlogin"
+        android:text="@string/oui_chef_login"
         android:textAlignment="center"
         android:textColor = "@android:color/white"
-        android:textSize = "30sp"
+        android:textSize = "50sp"
         android:textStyle="bold"
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true"/>

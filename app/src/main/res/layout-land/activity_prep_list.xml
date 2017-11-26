@@ -24,11 +24,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
-        android:id="@+id/left_linearLayout"
         android:layout_alignEnd="@+id/center_point"
         android:layout_alignRight="@+id/center_point">
         <TextView
-            android:id="@+id/recipe_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -39,7 +37,6 @@
             android:text="@string/prep_list"/>
 
         <EditText
-            android:id="@+id/add_prep_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background= "@android:color/white"
@@ -49,7 +46,6 @@
             android:inputType="text"
             android:hint="@string/enter_item_to_prep"/>
         <Button
-            android:id="@+id/prep_item_button"
             style="?android:textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +56,6 @@
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
         <Button
-            android:id="@+id/action_delete_all"
             style="?android:textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +67,6 @@
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/right_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,7 +75,6 @@
         android:layout_alignStart="@+id/center_point"
         android:layout_alignLeft="@+id/center_point">
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/prep_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"/>

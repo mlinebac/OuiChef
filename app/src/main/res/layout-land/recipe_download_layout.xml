@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
-        android:id="@+id/left_linearLayout"
         android:layout_alignEnd="@+id/center_point"
         android:layout_alignRight="@+id/center_point">
         <TextView
@@ -36,7 +35,6 @@
             android:text="@string/enter_recipes"/>
 
         <EditText
-            android:id="@+id/name_recipes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background= "@android:color/white"
@@ -46,7 +44,6 @@
             android:inputType="text"
             android:hint="@string/enter_recipe_to_search"/>
         <Button
-            android:id="@+id/add_recipes_button"
             style="?android:textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +55,6 @@
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/right_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,7 +63,6 @@
         android:layout_alignStart="@+id/center_point"
         android:layout_alignLeft="@+id/center_point">
         <ListView
-            android:id="@+id/recipe_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"/>

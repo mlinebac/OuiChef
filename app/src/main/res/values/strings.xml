@@ -4,18 +4,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_recipes">Recipes</string>
-    <string name="title_activity_order_list">OrderList</string>
-    <string name="title_activity_eighty_six_board">EightySixBoard</string>
     <string name="order_list">Order List</string>
     <string name="enter_item_to_order">Enter Item to Order</string>
     <string name="home">HOME</string>
@@ -32,7 +21,6 @@
     <string name="enter_item_to_prep">Enter item to prep</string>
     <string name="delete_list">Delete List</string>
     <string name="enter_recipe_to_search">Enter Recipe to Search</string>
-    <string name="search_recipes">Search Recipes</string>
     <string name="double_recipe">Double Recipe</string>
     <string name="download_recipe">download recipe</string>
     <string name="enter_recipe_name">Enter Recipe Name</string>
@@ -41,7 +29,6 @@
     <string name="enter_new_recipe_name_here">Enter new recipe name here</string>
     <string name="enter">enter</string>
     <string name="enter_ingredient">Enter Ingredient</string>
-    <string name="enter_amount">Enter amount</string>
     <string name="enter_unit">Enter unit</string>
     <string name="create_recipe">Create Recipe</string>
     <string name="recipe_menu">Recipe Menu</string>
@@ -50,4 +37,6 @@
     <string name="upload">upload</string>
     <string name="recipes">Recipes</string>
     <string name="delete">DELETE</string>
+    <string name="oui_chef_login">Oui Chef Login</string>
+    <string name="enter_amount">Enter Amount</string>
 </resources>

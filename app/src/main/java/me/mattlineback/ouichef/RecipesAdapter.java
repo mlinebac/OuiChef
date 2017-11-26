@@ -16,12 +16,11 @@ import java.util.ArrayList;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHolder>{
     private static final String TAG = "myApp";
-    private Context context;
     private ArrayList<RecipeItem> recipeItems;
 
 
     RecipesAdapter(Context context, ArrayList<RecipeItem> items) {
-        this.context = context;
+        Context context1 = context;
         this.recipeItems= items;
     }
 
@@ -52,7 +51,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHo
 
     @Override
     public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecipeHolder viewHolder = null;
+        RecipeHolder viewHolder;
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_recipe, parent, false);
         viewHolder = new RecipeHolder(layoutView);
         return viewHolder;
@@ -60,6 +59,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHo
 
     @Override
     public void onBindViewHolder(RecipeHolder holder, int position) {
+
        holder.ingredient.setText(recipeItems.get(position).getIngredient());
        holder.amt.setText(String.valueOf(recipeItems.get(position).getAmount()));
        holder.amtUnit.setText(recipeItems.get(position).getUnit());

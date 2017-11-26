@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String TAG = LoginActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
 
     @BindView(R2.id.email_sign_in_button)
     Button mPasswordLoginButton;

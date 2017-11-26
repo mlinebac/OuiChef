@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RecipeSearch extends AppCompatActivity {
-    private final String TAG = "RecipeSearch";
 
     DatabaseReference myRef;
     Query query;
@@ -41,6 +41,8 @@ public class RecipeSearch extends AppCompatActivity {
     Button searchBtn;
     @BindView(R2.id.name_recipes)
     EditText searchRecipe;
+    @BindView(R2.id.recipe_title)
+    TextView recipeTitle;
     @BindView(R2.id.recipe_view)
     RecyclerView recipeView;
 
@@ -63,6 +65,7 @@ public class RecipeSearch extends AppCompatActivity {
             public void onClick(View view) {
                 recipe = searchRecipe.getText().toString();
                 searchRecipe.setText("");
+                recipeTitle.setText(recipe);
                 myRef.child("recipeSearched").setValue(recipe);
                 recipeList.clear();
 
@@ -79,6 +82,7 @@ public class RecipeSearch extends AppCompatActivity {
                 if(dataSnapshot.getKey().equals(recipe)){
                     for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                         RecipeItem changedItem = snapshot.getValue(RecipeItem.class);
+
                         recipeList.add(changedItem);
                         adapter.notifyDataSetChanged();
                     }
@@ -108,6 +112,7 @@ public class RecipeSearch extends AppCompatActivity {
         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
             RecipeItem item = snapshot.getValue(RecipeItem.class);
             recipeList.add(item);
+            String TAG = "RecipeSearch";
             Log.d(TAG, "recipeItem Added" + item);
         }
         adapter.notifyDataSetChanged();

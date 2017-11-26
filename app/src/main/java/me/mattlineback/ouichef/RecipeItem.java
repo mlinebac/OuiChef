@@ -1,6 +1,5 @@
 package me.mattlineback.ouichef;
 
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -11,12 +10,11 @@ import java.util.Map;
  */
 
 public class RecipeItem {
-    private String name, ingredient, unit, instruction;
+    private String ingredient, unit, instruction;
     private int amount;
 
 
     RecipeItem( String ingredient, int amount, String unit, String instruction){
-       // this.setName(name);
         this.ingredient = ingredient;
         this.amount = amount;
         this.unit = unit;
@@ -24,12 +22,7 @@ public class RecipeItem {
     }
     public RecipeItem(){
     }
-    String getName(){
-        return name;
-    }
-    //private void setName(String name){
-     //   this.name = name;
-   // }
+
     String getIngredient(){
         return ingredient;
     }

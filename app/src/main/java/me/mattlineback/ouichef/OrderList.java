@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OrderList extends AppCompatActivity {
-    private final String TAG = "OrderListActivity";
     private OrderListAdapter orderListAdapter;
     private List<ListItem> allItems;
     private RecyclerView orderListRV;
@@ -148,6 +147,7 @@ public class OrderList extends AppCompatActivity {
                     myRef.child(item).removeValue();
                 }
             }
+            String TAG = "OrderListActivity";
             Log.d(TAG, "orderItem Removed" + item);
             orderListAdapter.notifyDataSetChanged();
             orderListAdapter = new OrderListAdapter(OrderList.this, allItems);

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,15 +24,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EightySixBoard extends AppCompatActivity {
-    private final String TAG = "EightySizBoardActivity";
     private EightySixBoardAdapter eightySixBoardAdapter;
     private List<ListItem> allItems;
     private RecyclerView eightySixRV;
 
-    LinearLayoutManager linearLayoutManager;
-    DatabaseReference myRef;
+    private LinearLayoutManager linearLayoutManager;
+    private DatabaseReference myRef;
 
-    @BindView(R2.id.button_home) Button home;
+    @BindView(R2.id.button_home)
+    Button home;
     @BindView(R2.id.EightySix_item_button)
     Button addItemButton;
     @BindView(R2.id.list_86_list)
@@ -124,6 +123,7 @@ public class EightySixBoard extends AppCompatActivity {
                     myRef.child(item).removeValue();
                 }
             }
+            String TAG = "EightySizBoardActivity";
             Log.d(TAG, "eighty six Item Removed" + item);
             eightySixBoardAdapter.notifyDataSetChanged();
             eightySixBoardAdapter = new EightySixBoardAdapter(EightySixBoard.this, allItems);

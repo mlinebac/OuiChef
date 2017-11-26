@@ -54,6 +54,7 @@ public class RecipeDownload extends AppCompatActivity {
         this.myRef = mDB.getReference("recipes");
 
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connMgr != null;
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             btnDownload.setEnabled(true);

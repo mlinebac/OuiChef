@@ -16,8 +16,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
-    AsyncResult callback;
+class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+    private final AsyncResult callback;
 
     public DownloadWebpageTask(AsyncResult callback) {
         this.callback = callback;
@@ -64,8 +64,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
             int responseCode = conn.getResponseCode();
             is = conn.getInputStream();
 
-            String contentAsString = convertStreamToString(is);
-            return contentAsString;
+            return convertStreamToString(is);
         } finally {
             if (is != null) {
                 is.close();
@@ -77,10 +76,10 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
