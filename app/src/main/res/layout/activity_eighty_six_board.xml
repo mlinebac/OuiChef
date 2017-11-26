@@ -6,56 +6,62 @@
     android:layout_height="match_parent"
     tools:context="me.mattlineback.ouichef.EightySixBoard"
     android:background="@color/colorPrimary">
-    <Button
-        android:id="@+id/button_home"
-        android:padding="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+    <RelativeLayout
+        android:id="@+id/relative_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home"/>
-    <Button
-        android:id="@+id/action_delete_all"
-        style="?android:textAppearanceLarge"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
         android:padding="10dp"
-        android:text="@string/delete_list"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/button_home"
+            android:padding="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home"
+            android:layout_marginRight="50dp" />
+        <TextView
+            android:id="@+id/title_86_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button_home"
+            android:layout_toEndOf="@id/button_home"
+            android:layout_marginEnd="20dp"
+            android:textAlignment="center"
+            android:textColor = "@android:color/white"
+            android:textSize = "50sp"
+            android:textStyle = "bold"
+            android:text="@string/_86_list"
+            android:layout_marginRight="20dp" />
+        <Button
+            android:id="@+id/action_delete_all"
+            style="?android:textAppearanceLarge"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="@string/delete_list"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/title_86_list"
+            android:layout_toEndOf="@id/title_86_list" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
         android:id="@+id/linearLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:id="@+id/title_86_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:textAlignment="center"
-            android:textColor = "@android:color/white"
-            android:textSize = "50sp"
-            android:textStyle = "bold"
-            android:text="@string/_86_list"/>
-
+        android:layout_below="@id/relative_1">
         <EditText
             android:id="@+id/list_86_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background= "@android:color/white"
             android:textSize = "20sp"
-            android:layout_marginTop="30dp"
             android:padding="10dp"
             android:inputType="text"
             android:hint="@string/enter_item_to_86"/>

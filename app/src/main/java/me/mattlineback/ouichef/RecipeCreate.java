@@ -68,7 +68,7 @@ public class RecipeCreate extends AppCompatActivity {
                 setRecipeChild(newRecipeName);
                 String ingredient = recipeIngredient.getText().toString();
                 recipeIngredient.setText("");
-                int amount = Integer.parseInt(recipeAmt.getText().toString());
+                double amount = Double.parseDouble(recipeAmt.getText().toString());
                 recipeAmt.setText("");
                 String unit = recipeUnit.getText().toString();
                 recipeUnit.setText("");
@@ -83,11 +83,7 @@ public class RecipeCreate extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getKey().equals(recipeChild)) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        RecipeItem newItem = snapshot.getValue(RecipeItem.class);
-                        recipeList.add(newItem);
-                        Log.d(TAG, "Added newItem = " + newItem);
-                    }
+                    getAllItems(dataSnapshot);
 
                 }
 
@@ -96,11 +92,7 @@ public class RecipeCreate extends AppCompatActivity {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getKey().equals(recipeChild)) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        RecipeItem changedItem = snapshot.getValue(RecipeItem.class);
-                        recipeList.add(changedItem);
-                        Log.d(TAG, "Changed Value is: " + changedItem);
-                    }
+                  getAllItems(dataSnapshot);
                 }
             }
 
@@ -119,6 +111,18 @@ public class RecipeCreate extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void getAllItems(DataSnapshot dataSnapshot) {
+        recipeList.clear();
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            RecipeItem item = snapshot.getValue(RecipeItem.class);
+            recipeList.add(item);
+            Log.d(TAG, "recipeItem Added" + item);
+        }
+        adapter.notifyDataSetChanged();
+        adapter = new RecipesAdapter(RecipeCreate.this, recipeList);
+        recipeView.setAdapter(adapter);
     }
     public void setRecipeChild(String str){
         this.recipeChild = str;

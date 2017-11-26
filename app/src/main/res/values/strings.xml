@@ -39,4 +39,6 @@
     <string name="delete">DELETE</string>
     <string name="oui_chef_login">Oui Chef Login</string>
     <string name="enter_amount">Enter Amount</string>
+    <string name="number">Number</string>
+    <string name="x_recipe">X Recipe</string>
 </resources>

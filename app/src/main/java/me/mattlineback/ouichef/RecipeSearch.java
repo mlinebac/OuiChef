@@ -17,7 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,8 +36,10 @@ public class RecipeSearch extends AppCompatActivity {
 
     @BindView(R2.id.button_home)
     Button home;
+    @BindView(R2.id.scaler_box)
+    EditText scalerBox;
     @BindView(R2.id.double_button)
-    Button doubleButton;
+    Button scalerButton;
     @BindView(R2.id.search_recipes)
     Button searchBtn;
     @BindView(R2.id.name_recipes)
@@ -62,7 +63,7 @@ public class RecipeSearch extends AppCompatActivity {
         this.myRef = FirebaseDatabase.getInstance().getReference("recipes");
         query = myRef.orderByKey();
 
-        doubleButton.setOnClickListener(new View.OnClickListener() {
+        scalerButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             query.addChildEventListener(new ChildEventListener() {
@@ -150,8 +151,9 @@ public class RecipeSearch extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         RecipeItem item = snapshot.getValue(RecipeItem.class);
                         if (item == null) throw new AssertionError();
-                        int amount = item.getAmount();
-                        item.doubleAmount(amount);
+                        double amount = item.getAmount();
+                        int scaler = Integer.parseInt(scalerBox.getText().toString());
+                        item.scaleAmount(amount, scaler);
                         Log.d(TAG, "doubled Amount = " + item.getAmount());
                         recipeList.add(item);
                     }

@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class RecipeItem {
     private String ingredient, unit, instruction;
-    private int amount;
+    private double amount;
 
 
-    RecipeItem( String ingredient, int amount, String unit, String instruction){
+    RecipeItem( String ingredient, double amount, String unit, String instruction){
         this.ingredient = ingredient;
         this.amount = amount;
         this.unit = unit;
@@ -31,15 +31,15 @@ public class RecipeItem {
         this.ingredient = ingredient;
     }
 
-    int getAmount(){
+    double getAmount(){
         return amount;
     }
 
-    private void setAmount(int amount){
+    private void setAmount(double amount){
         this.amount = amount;
     }
-    public void doubleAmount(int amount){
-        setAmount(amount*2);
+    public void scaleAmount(double amount, int scaler){
+        setAmount(amount*scaler);
     }
     String getUnit(){
         return unit;
