@@ -13,7 +13,6 @@ public class RecipeItem {
     private String ingredient, unit, instruction;
     private double amount;
 
-
     RecipeItem( String ingredient, double amount, String unit, String instruction){
         this.ingredient = ingredient;
         this.amount = amount;
@@ -38,9 +37,11 @@ public class RecipeItem {
     private void setAmount(double amount){
         this.amount = amount;
     }
+
     public void scaleAmount(double amount, int scaler){
         setAmount(amount*scaler);
     }
+
     String getUnit(){
         return unit;
     }

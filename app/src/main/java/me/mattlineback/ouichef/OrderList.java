@@ -27,19 +27,13 @@ public class OrderList extends AppCompatActivity {
     private OrderListAdapter orderListAdapter;
     private List<ListItem> allItems;
     private RecyclerView orderListRV;
-
+    @BindView(R2.id.button_home) Button home;
+    @BindView(R2.id.order_item_button) Button addItemButton;
+    @BindView(R2.id.add_order_item) EditText addOrderItem;
+    @BindView(R2.id.action_delete_all) Button deleteList;
     DatabaseReference myRef;
     LinearLayoutManager linearLayoutManager;
-
-    @BindView(R2.id.button_home)
-    Button home;
-    @BindView(R2.id.order_item_button)
-    Button addItemButton;
-    @BindView(R2.id.add_order_item)
-    EditText addOrderItem;
-    @BindView(R2.id.action_delete_all)
-    Button deleteList;
-
+    final String TAG = "OrderListActivity";
 
     /**
      * @param savedInstanceState
@@ -147,7 +141,7 @@ public class OrderList extends AppCompatActivity {
                     myRef.child(item).removeValue();
                 }
             }
-            String TAG = "OrderListActivity";
+
             Log.d(TAG, "orderItem Removed" + item);
             orderListAdapter.notifyDataSetChanged();
             orderListAdapter = new OrderListAdapter(OrderList.this, allItems);

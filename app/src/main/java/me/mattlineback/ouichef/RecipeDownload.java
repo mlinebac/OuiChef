@@ -108,10 +108,10 @@ public class RecipeDownload extends AppCompatActivity {
                 JSONObject row = rows.getJSONObject(r);
                 JSONArray columns = row.getJSONArray("c");
 
-                String ingredient = columns.getJSONObject(1).getString("v");
-                int amount = columns.getJSONObject(2).getInt("v");
-                String unit = columns.getJSONObject(3).getString("v");
-                String instruction = columns.getJSONObject(4).getString("v");
+                String ingredient = columns.getJSONObject(0).getString("v");
+                int amount = columns.getJSONObject(1).getInt("v");
+                String unit = columns.getJSONObject(2).getString("v");
+                String instruction = columns.getJSONObject(3).getString("v");
 
                 //entering recipe into database
                 name = recipeName.getText().toString();

@@ -42,7 +42,6 @@ public class RecipeSearch extends AppCompatActivity {
     @BindView(R2.id.recipe_title) TextView recipeTitle;
     @BindView(R2.id.recipe_view) RecyclerView recipeView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

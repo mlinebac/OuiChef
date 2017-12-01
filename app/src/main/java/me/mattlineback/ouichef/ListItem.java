@@ -6,6 +6,7 @@ package me.mattlineback.ouichef;
 
 class ListItem {
     private String listItem;
+    //empty constructor for firebase
     public ListItem() {
     }
 
