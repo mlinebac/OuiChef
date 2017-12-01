@@ -34,20 +34,13 @@ public class RecipeSearch extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     String TAG = "RecipeSearch";
 
-    @BindView(R2.id.button_home)
-    Button home;
-    @BindView(R2.id.scaler_box)
-    EditText scalerBox;
-    @BindView(R2.id.double_button)
-    Button scalerButton;
-    @BindView(R2.id.search_recipes)
-    Button searchBtn;
-    @BindView(R2.id.name_recipes)
-    EditText searchRecipe;
-    @BindView(R2.id.recipe_title)
-    TextView recipeTitle;
-    @BindView(R2.id.recipe_view)
-    RecyclerView recipeView;
+    @BindView(R2.id.button_home) Button home;
+    @BindView(R2.id.scaler_box) EditText scalerBox;
+    @BindView(R2.id.double_button) Button scalerButton;
+    @BindView(R2.id.search_recipes) Button searchBtn;
+    @BindView(R2.id.name_recipes) EditText searchRecipe;
+    @BindView(R2.id.recipe_title) TextView recipeTitle;
+    @BindView(R2.id.recipe_view) RecyclerView recipeView;
 
 
     @Override

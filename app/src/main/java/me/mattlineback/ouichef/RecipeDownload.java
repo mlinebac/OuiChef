@@ -1,16 +1,22 @@
 package me.mattlineback.ouichef;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,7 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,14 +38,17 @@ public class RecipeDownload extends AppCompatActivity {
     DatabaseReference myRef;
 
     @BindView(R2.id.button_home) Button home;
-    @BindView(R2.id.recipe_view_download)
-    RecyclerView recipeRecyclerView;
+    @BindView(R2.id.recipe_view_download) RecyclerView recipeRecyclerView;
     @BindView(R2.id.download_recipes_button) Button btnDownload;
     @BindView(R2.id.name_recipes) EditText recipeName;
-
+    @BindView(R2.id.recipe_title) TextView recipeTitle;
+    @BindView(R2.id.url_recipe) EditText recipeURL;
     ArrayList<RecipeItem> recipeItems;
     LinearLayoutManager linearLayoutManager;
     RecipesAdapter adapter;
+    private final String USER_URL = "https://spreadsheets.google.com/tq?key=";
+    private String USER_KEY;
+    String TAG = "RecipeDownload";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +74,31 @@ public class RecipeDownload extends AppCompatActivity {
         }
 
     }
+
     public void buttonClickHandler(View view) {
+        String uriString = recipeURL.getText().toString();
+        Uri uri = Uri.parse(uriString);
+        List<String> pathsegs;
+        pathsegs = uri.getPathSegments();
+        for (int i = 0; i < pathsegs.size(); i++){
+            if(pathsegs.get(i).length() > 20){
+                USER_KEY = pathsegs.get(i);
+            }
+        }
+        Log.d(TAG, "user key = " + USER_KEY);
+        ClipboardManager clipboard = (ClipboardManager)
+                getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newUri(getContentResolver(),"URI", uri);
+        clipboard.setPrimaryClip(clip);
+        //USER_KEY = "1i0pEwEDjCDJfAesI9AadFkhhFaYxAKB9rEIiIlAlvxQ";
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1i0pEwEDjCDJfAesI9AadFkhhFaYxAKB9rEIiIlAlvxQ");
+        }).execute(USER_URL+USER_KEY);
     }
+    //"https://spreadsheets.google.com/tq?key=1i0pEwEDjCDJfAesI9AadFkhhFaYxAKB9rEIiIlAlvxQ"
     private void processJson(JSONObject object) {
         try {
             JSONArray rows = object.getJSONArray("rows");
@@ -87,6 +115,7 @@ public class RecipeDownload extends AppCompatActivity {
 
                 //entering recipe into database
                 name = recipeName.getText().toString();
+                recipeTitle.setText(name);
                 recipeItem = new RecipeItem(ingredient, amount, unit, instruction);
                 //adding each item to recipe
                 recipeItems.add(recipeItem);

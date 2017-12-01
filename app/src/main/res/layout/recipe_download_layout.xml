@@ -40,6 +40,16 @@
             android:inputType="text"
             android:hint="@string/enter_recipe_name"
             android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/url_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:inputType="textUri"
+            android:hint="Paste Google Sheet URL Here"
+            android:textSize="20sp" />
         <Button
             android:id="@+id/download_recipes_button"
             android:enabled = "false"
@@ -53,6 +63,21 @@
             android:text="@string/download_recipe"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/recipe_title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_margin="20dp">
+            <TextView
+                android:id="@+id/recipe_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recipe_view_download"
             android:layout_width="wrap_content"
