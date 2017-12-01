@@ -90,15 +90,25 @@
             android:background="@color/colorAccent"
             android:text="Scale Recipe"
             android:padding="10dp"
-            android:textColor="@android:color/background_light"
-            android:layout_toRightOf="@+id/scaler_box"
-            android:layout_toEndOf="@+id/scaler_box"/>
+            android:textColor="@android:color/background_light" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_2"
+        android:layout_marginTop="20dp">
+        <ListView
+            android:id="@+id/recipe_title_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/recipe_title_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_2"
+        android:layout_below="@id/layout_3"
         android:layout_margin="20dp">
         <TextView
             android:id="@+id/recipe_title"
@@ -106,8 +116,7 @@
             android:layout_height="wrap_content"
             android:textSize="40sp"
             android:textColor="@android:color/white"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

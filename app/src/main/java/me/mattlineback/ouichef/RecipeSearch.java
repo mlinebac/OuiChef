@@ -1,22 +1,31 @@
 package me.mattlineback.ouichef;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -24,12 +33,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static me.mattlineback.ouichef.R2.id.position;
+
 public class RecipeSearch extends AppCompatActivity {
 
     DatabaseReference myRef;
     Query query;
     ArrayList<RecipeItem> recipeList;
     RecipesAdapter adapter;
+    ArrayList<String> recipeTitleList = new ArrayList<>();
+    ArrayAdapter<String> titleAdapter;// = new ArrayAdapter<>();
     String recipe = " ";
     LinearLayoutManager linearLayoutManager;
     String TAG = "RecipeSearch";
@@ -41,6 +54,8 @@ public class RecipeSearch extends AppCompatActivity {
     @BindView(R2.id.name_recipes) EditText searchRecipe;
     @BindView(R2.id.recipe_title) TextView recipeTitle;
     @BindView(R2.id.recipe_view) RecyclerView recipeView;
+    @BindView(R2.id.recipe_title_list)
+    ListView recipeTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +70,46 @@ public class RecipeSearch extends AppCompatActivity {
         this.myRef = FirebaseDatabase.getInstance().getReference("recipes");
         query = myRef.orderByKey();
 
-        scalerButton.setOnClickListener(new View.OnClickListener() {
+        titleAdapter = new ArrayAdapter<>(
+                this,android.R.layout.simple_list_item_1, recipeTitleList
+        );
+        recipeTitles.setBackgroundColor(Color.WHITE);
+
+        recipeTitles.setAdapter(titleAdapter);
+        titleAdapter.notifyDataSetChanged();
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                        String recipe = dataSnapshot1.getKey();
+                        recipeTitleList.add(recipe);
+                        Log.d(TAG, "recipe Title Added" + dataSnapshot1.getKey());
+                    }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        scalerButton.setOnClickListener(new OnClickListener() {
         @Override
         public void onClick(View view) {
             query.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     if (dataSnapshot.getKey().equals(recipe)) {
-                        doubleItems(dataSnapshot);
+                        scaleItems(dataSnapshot);
                     }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     if (dataSnapshot.getKey().equals(recipe)) {
-                        doubleItems(dataSnapshot);
+                        scaleItems(dataSnapshot);
                     }
                 }
 
@@ -90,14 +130,16 @@ public class RecipeSearch extends AppCompatActivity {
             });
         }
     });
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        searchBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                recipeTitleList.clear();
                 recipe = searchRecipe.getText().toString();
                 searchRecipe.setText("");
                 recipeTitle.setText(recipe);
                 myRef.child("recipeSearched").setValue(recipe);
                 recipeList.clear();
+
 
         query.addChildEventListener(new ChildEventListener() {
             @Override
@@ -112,7 +154,6 @@ public class RecipeSearch extends AppCompatActivity {
                 if(dataSnapshot.getKey().equals(recipe)){
                     for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                         RecipeItem changedItem = snapshot.getValue(RecipeItem.class);
-
                         recipeList.add(changedItem);
                         adapter.notifyDataSetChanged();
                     }
@@ -138,7 +179,7 @@ public class RecipeSearch extends AppCompatActivity {
             }
         });
             }//onCreate
-                private void doubleItems(DataSnapshot dataSnapshot) {
+                private void scaleItems(DataSnapshot dataSnapshot) {
                     recipeList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         RecipeItem item = snapshot.getValue(RecipeItem.class);
@@ -158,9 +199,9 @@ public class RecipeSearch extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         RecipeItem item = snapshot.getValue(RecipeItem.class);
                         recipeList.add(item);
-
                         Log.d(TAG, "recipeItem Added" + item);
                     }
+                    titleAdapter.notifyDataSetChanged();
                     adapter.notifyDataSetChanged();
                     adapter = new RecipesAdapter(RecipeSearch.this, recipeList);
                     recipeView.setAdapter(adapter);
