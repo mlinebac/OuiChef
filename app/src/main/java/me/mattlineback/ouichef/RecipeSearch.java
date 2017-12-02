@@ -9,16 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,8 +28,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static me.mattlineback.ouichef.R2.id.position;
 
 public class RecipeSearch extends AppCompatActivity {
 
@@ -54,8 +48,7 @@ public class RecipeSearch extends AppCompatActivity {
     @BindView(R2.id.name_recipes) EditText searchRecipe;
     @BindView(R2.id.recipe_title) TextView recipeTitle;
     @BindView(R2.id.recipe_view) RecyclerView recipeView;
-    @BindView(R2.id.recipe_title_list)
-    ListView recipeTitles;
+    @BindView(R2.id.recipe_title_list) ListView recipeTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
