@@ -125,7 +125,6 @@ public class EightySixBoard extends AppCompatActivity {
             eightySixBoardAdapter = new EightySixBoardAdapter(EightySixBoard.this, allItems);
             eightySixRV.setAdapter(eightySixBoardAdapter);
         }
-
     }
 
     @OnClick(R2.id.button_home)
@@ -135,6 +134,5 @@ public class EightySixBoard extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
 }
