@@ -41,4 +41,6 @@
     <string name="enter_amount">Enter Amount</string>
     <string name="number">Number</string>
     <string name="x_recipe">X Recipe</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
 </resources>

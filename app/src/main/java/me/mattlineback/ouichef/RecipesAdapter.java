@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by matt on 10/30/17.
+ * Created by Matt Lineback on 10/30/17.
  */
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHolder>{
@@ -33,15 +33,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHo
     RecipesAdapter(Context context, ArrayList<RecipeItem> items) {
         Context context1 = context;
         this.recipeItems= items;
-
     }
 
     class RecipeHolder extends RecyclerView.ViewHolder{
-        TextView ingredient;
-        TextView amt;
-        TextView amtUnit;
-        TextView instruction;
-
+        TextView ingredient, amt, amtUnit, instruction;
 
         RecipeHolder(final View view){
             super(view);
@@ -54,7 +49,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeHo
             editView(amtUnit);
             instruction = view.findViewById(R.id.instruction);
             editView(instruction);
-
         }
     }
 

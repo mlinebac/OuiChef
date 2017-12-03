@@ -23,7 +23,7 @@ import java.util.List;
 import static android.support.v7.widget.RecyclerView.*;
 
 /**
- * Created by mattlineback on 11/6/2017.
+ * Created by Matt Lineback on 11/6/2017.
  */
 
 public class PrepListAdapter extends  RecyclerView.Adapter<PrepListAdapter.PrepListHolder>{
@@ -59,7 +59,6 @@ public class PrepListAdapter extends  RecyclerView.Adapter<PrepListAdapter.PrepL
         tv.setTextSize(20);
     }
 
-
     class PrepListHolder extends ViewHolder {
         private static final String TAG = "EightySixBoardHolder.class";
         TextView listItem;
@@ -69,7 +68,6 @@ public class PrepListAdapter extends  RecyclerView.Adapter<PrepListAdapter.PrepL
             super(view);
             listItem = view.findViewById(R.id.list_item_view);
             deleteIcon = view.findViewById(R.id.list_item_delete);
-
 
             deleteIcon.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -98,6 +96,5 @@ public class PrepListAdapter extends  RecyclerView.Adapter<PrepListAdapter.PrepL
             });
         }
     }
-
 }
 

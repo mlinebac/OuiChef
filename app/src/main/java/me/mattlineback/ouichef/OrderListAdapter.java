@@ -69,7 +69,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
             listItem = view.findViewById(R.id.list_item_view);
             deleteIcon = view.findViewById(R.id.list_item_delete);
 
-
             deleteIcon.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){

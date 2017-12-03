@@ -43,6 +43,7 @@ public class RecipeDownload extends AppCompatActivity {
     @BindView(R2.id.name_recipes) EditText recipeName;
     @BindView(R2.id.recipe_title) TextView recipeTitle;
     @BindView(R2.id.url_recipe) EditText recipeURL;
+
     ArrayList<RecipeItem> recipeItems;
     LinearLayoutManager linearLayoutManager;
     RecipesAdapter adapter;
@@ -72,7 +73,6 @@ public class RecipeDownload extends AppCompatActivity {
         } else {
             btnDownload.setEnabled(false);
         }
-
     }
 
     public void buttonClickHandler(View view) {
@@ -90,7 +90,7 @@ public class RecipeDownload extends AppCompatActivity {
                 getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newUri(getContentResolver(),"URI", uri);
         clipboard.setPrimaryClip(clip);
-        //USER_KEY = "1i0pEwEDjCDJfAesI9AadFkhhFaYxAKB9rEIiIlAlvxQ";
+
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
@@ -98,7 +98,7 @@ public class RecipeDownload extends AppCompatActivity {
             }
         }).execute(USER_URL+USER_KEY);
     }
-    //"https://spreadsheets.google.com/tq?key=1i0pEwEDjCDJfAesI9AadFkhhFaYxAKB9rEIiIlAlvxQ"
+
     private void processJson(JSONObject object) {
         try {
             JSONArray rows = object.getJSONArray("rows");
@@ -125,7 +125,6 @@ public class RecipeDownload extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @OnClick(R2.id.button_home)
@@ -135,6 +134,5 @@ public class RecipeDownload extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
 }

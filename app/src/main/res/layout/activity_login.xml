@@ -7,14 +7,14 @@
     android:background="@color/colorPrimary">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:padding="30dp"
-        android:layout_margin="50dp"
-        android:id="@+id/linearLayout">
+        android:layout_margin="50dp">
 
         <EditText
             android:id="@+id/email"
@@ -23,7 +23,7 @@
             android:background="@android:color/white"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
-            android:hint="@string/prompt_email"
+            android:hint="@string/enter_email"
             android:inputType="textEmailAddress"
             android:textSize="20sp"
             android:nextFocusDown="@+id/password"/>
@@ -31,7 +31,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/prompt_password"
+            android:hint="@string/enter_password"
             android:background="@android:color/white"
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"

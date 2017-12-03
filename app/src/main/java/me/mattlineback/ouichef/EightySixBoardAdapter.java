@@ -23,7 +23,7 @@ import java.util.List;
 import static android.support.v7.widget.RecyclerView.*;
 
 /**
- * Created by mattlineback on 11/6/2017.
+ * Created by Matt Lineback on 11/6/2017.
  */
 
 public class EightySixBoardAdapter extends RecyclerView.Adapter<EightySixBoardAdapter.EightySixBoardHolder>{

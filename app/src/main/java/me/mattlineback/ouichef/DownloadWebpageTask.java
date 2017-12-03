@@ -1,7 +1,11 @@
 package me.mattlineback.ouichef;
 
 /**
- * Created by matt on 10/30/17.
+ *
+ * Created by Telerik
+ * https://github.com/telerik/Android-samples/blob/master/Blogs/Json-Reader/app/src/main/java/com/example/progress/json_reader/MainActivity.java
+ * Adapted by Matt Lineback on 10/30/17.
+ *
  */
 
 import android.os.AsyncTask;
@@ -25,7 +29,6 @@ class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
-
         // params comes from the execute() call: params[0] is the url.
         try {
             return downloadUrl(urls[0]);

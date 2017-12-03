@@ -24,24 +24,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RecipeCreate extends AppCompatActivity {
-    @BindView(R2.id.button_home)
-    Button home;
-    @BindView(R2.id.enter_recipe_name)
-    EditText recipeName;
-    @BindView(R2.id.enter_recipe_button)
-    Button recipeNameBtn;
-    @BindView(R2.id.enter_ingredient)
-    EditText recipeIngredient;
-    @BindView(R2.id.enter_amount)
-    EditText recipeAmt;
-    @BindView(R2.id.enter_unit)
-    EditText recipeUnit;
-    @BindView(R2.id.enter_instructions)
-    EditText recipeInstructions;
-    @BindView(R2.id.recipe_view_create)
-    RecyclerView recipeView;
 
-    private String TAG = "createRecipe";
+    @BindView(R2.id.button_home) Button home;
+    @BindView(R2.id.enter_recipe_name) EditText recipeName;
+    @BindView(R2.id.enter_recipe_button) Button recipeNameBtn;
+    @BindView(R2.id.enter_ingredient) EditText recipeIngredient;
+    @BindView(R2.id.enter_amount) EditText recipeAmt;
+    @BindView(R2.id.enter_unit) EditText recipeUnit;
+    @BindView(R2.id.enter_instructions) EditText recipeInstructions;
+    @BindView(R2.id.recipe_view_create) RecyclerView recipeView;
+
+    private final String TAG = "createRecipe";
     private DatabaseReference myRef;
     RecipesAdapter adapter;
     String recipeChild = " ";
@@ -61,11 +54,13 @@ public class RecipeCreate extends AppCompatActivity {
         this.myRef = FirebaseDatabase.getInstance().getReference("recipes");
         Query query = myRef.orderByKey();
         Log.d(TAG, "query = " + query);
+
         recipeNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newRecipeName = recipeName.getText().toString();
                 setRecipeChild(newRecipeName);
+
                 String ingredient = recipeIngredient.getText().toString();
                 recipeIngredient.setText("");
                 double amount = Double.parseDouble(recipeAmt.getText().toString());
@@ -84,9 +79,7 @@ public class RecipeCreate extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getKey().equals(recipeChild)) {
                     getAllItems(dataSnapshot);
-
                 }
-
             }
 
             @Override
@@ -98,17 +91,14 @@ public class RecipeCreate extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -124,10 +114,11 @@ public class RecipeCreate extends AppCompatActivity {
         adapter = new RecipesAdapter(RecipeCreate.this, recipeList);
         recipeView.setAdapter(adapter);
     }
+
     public void setRecipeChild(String str){
         this.recipeChild = str;
-
     }
+
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {
@@ -135,6 +126,5 @@ public class RecipeCreate extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
 }

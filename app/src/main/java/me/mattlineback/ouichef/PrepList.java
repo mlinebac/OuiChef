@@ -27,21 +27,14 @@ public class PrepList extends AppCompatActivity {
     private final String TAG = "prepListActivity";
     private PrepListAdapter prepListAdapter;
     private List<ListItem> allItems;
-
-
     DatabaseReference myRef;
     LinearLayoutManager linearLayoutManager;
 
-    @BindView(R2.id.button_home)
-    Button home;
-    @BindView(R2.id.prep_item_button)
-    Button addItemButton;
-    @BindView(R2.id.add_prep_item)
-    EditText addPrepItem;
-    @BindView(R2.id.action_delete_all)
-    Button deleteList;
-    @BindView(R2.id.prep_list)
-    RecyclerView prepListRV;
+    @BindView(R2.id.button_home) Button home;
+    @BindView(R2.id.prep_item_button) Button addItemButton;
+    @BindView(R2.id.add_prep_item) EditText addPrepItem;
+    @BindView(R2.id.action_delete_all) Button deleteList;
+    @BindView(R2.id.prep_list) RecyclerView prepListRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +71,6 @@ public class PrepList extends AppCompatActivity {
         });
 
         myRef.addChildEventListener(new ChildEventListener() {
-
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -130,7 +122,6 @@ public class PrepList extends AppCompatActivity {
             prepListAdapter = new PrepListAdapter(PrepList.this, allItems);
             prepListRV.setAdapter(prepListAdapter);
         }
-
     }
 
     @OnClick(R2.id.button_home)
@@ -140,6 +131,5 @@ public class PrepList extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
 }

@@ -12,15 +12,10 @@ import butterknife.OnClick;
 
 public class RecipeMenu extends AppCompatActivity {
 
-    @BindView(R2.id.button_search)
-    Button btnSearch;
-    @BindView(R2.id.button_create)
-    Button btnCreate;
-    @BindView(R2.id.button_upload)
-    Button btnUpload;
-    @BindView(R2.id.button_home)
-    Button btnHome;
-
+    @BindView(R2.id.button_search) Button btnSearch;
+    @BindView(R2.id.button_create) Button btnCreate;
+    @BindView(R2.id.button_upload) Button btnUpload;
+    @BindView(R2.id.button_home) Button btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

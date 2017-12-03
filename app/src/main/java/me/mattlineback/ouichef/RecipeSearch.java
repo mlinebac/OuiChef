@@ -36,7 +36,7 @@ public class RecipeSearch extends AppCompatActivity {
     ArrayList<RecipeItem> recipeList;
     RecipesAdapter adapter;
     ArrayList<String> recipeTitleList = new ArrayList<>();
-    ArrayAdapter<String> titleAdapter;// = new ArrayAdapter<>();
+    ArrayAdapter<String> titleAdapter;
     String recipe = " ";
     LinearLayoutManager linearLayoutManager;
     String TAG = "RecipeSearch";
@@ -79,7 +79,6 @@ public class RecipeSearch extends AppCompatActivity {
                         recipeTitleList.add(recipe);
                         Log.d(TAG, "recipe Title Added" + dataSnapshot1.getKey());
                     }
-
             }
 
             @Override
@@ -200,10 +199,6 @@ public class RecipeSearch extends AppCompatActivity {
                     recipeView.setAdapter(adapter);
                 }
 
-
-    public String getRecipe(){
-        return this.recipe;
-    }
     @OnClick(R2.id.button_home)
     public void submit(View view) {
         if (view == home) {

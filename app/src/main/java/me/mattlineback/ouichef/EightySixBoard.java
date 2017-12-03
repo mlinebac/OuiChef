@@ -29,6 +29,7 @@ public class EightySixBoard extends AppCompatActivity {
     private RecyclerView eightySixRV;
     private LinearLayoutManager linearLayoutManager;
     private DatabaseReference myRef;
+
     @BindView(R2.id.button_home) Button home;
     @BindView(R2.id.EightySix_item_button) Button addItemButton;
     @BindView(R2.id.list_86_list) EditText addItem;
